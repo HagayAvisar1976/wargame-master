@@ -10,7 +10,7 @@ var engineers3 =["Hagay3","Avisar3","Dude3"];
 function attackerBotLogic() {
 
     var budget = GameEngineSDK.getMyBudget(attackerBotName);
-    //console.info("My budget :" + budget);
+    ////console.info("My budget :" + budget);
 
     if((GameEngineSDK.currentGeneration() % 20) === 0){
         var dimensions = GameEngineSDK.getMatrixDimensions();
