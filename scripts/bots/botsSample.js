@@ -2,6 +2,7 @@
 /****************************************************************************************/
 // Attacker Bot
 /****************************************************************************************/
+
 var attackerBotName = "AttackerBot";
 var engineers1 =["Hagay1","Avisar1","Dude1"];
 var engineers2 =["Hagay2","Avisar2","Dude2"];
@@ -10,7 +11,6 @@ var engineers3 =["Hagay3","Avisar3","Dude3"];
 function attackerBotLogic() {
 
     var budget = GameEngineSDK.getMyBudget(attackerBotName);
-    ////console.info("My budget :" + budget);
 
     if((GameEngineSDK.currentGeneration() % 20) === 0){
         var dimensions = GameEngineSDK.getMatrixDimensions();
@@ -36,7 +36,9 @@ function setCellsAccordingToPosition (cellsPosition,rowStart,colStart)
 
     return cellsToUpdate;
 }
+
 function createGlider (rowStart,colStart) {
+
 
     var cellsPosition = [[0, 0],
                                 [1, 1],
@@ -45,6 +47,14 @@ function createGlider (rowStart,colStart) {
     return setCellsAccordingToPosition(cellsPosition,rowStart,colStart);
 
 }
+
+/*
+function createAcron (rowStart,colStart){
+    var cellsPosition = [[-2,-1],[0,0],[-3,1],[-2,1],[1,1],[2,1],[3,1]];
+
+    return setCellsAccordingToPosition(cellsPosition,rowStart,colStart);
+}
+ */
 
 /****************************************************************************************/
 
@@ -84,14 +94,14 @@ function defenderLogic(){
                 defenderBotName_row = 40;
             }
         }
-        return createBloack(defenderBotName_row, colStart);
+        return createBlock(defenderBotName_row, colStart);
     }
 
     return null;
 
 }
 
-function createBloack(rowStart,colStart){
+function createBlock(rowStart,colStart){
 
     var cellsPosition = [[0,0],[0,1],
                          [1,0],[1,1]];
