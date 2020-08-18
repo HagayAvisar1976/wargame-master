@@ -6,6 +6,7 @@ var canvasWidth = 1200;
 var canvasHight = 700;
 var cellSize =  5; // default
 var fadeOutInterval;
+var useBackgroundAudio = true;// if true we will have background audio
 
 
 function onLoad() {
@@ -65,7 +66,7 @@ function callingBoomToMuch(lastcall) {
 
 function playBooomSound(){
     var myAudio = document.createElement("audio");
-    myAudio.volume = 0.7;
+    myAudio.volume = 0.3;
     myAudio.src ="./audio/bomb1.mp3";
     myAudio.load();
     myAudio.play();
@@ -211,6 +212,8 @@ function startNewGame() {
 
 function handleBackgroundAudio(start){
 
+    if(useBackgroundAudio == false) return; // do nothing if define without background audio.
+
     var backGroundAudio = document.getElementById("backGroundAudio");
     if(start == true){
         setBackgroundAudioSource();
@@ -250,6 +253,7 @@ function setBackgroundAudioSource() {
     const numberOfAudioFiles = 4;
 
     var fileNumer = (setBackgroundAudioSource.counter % numberOfAudioFiles)+1; //Math.floor(Math.random() * 2) + 1;
+    console.info("fileNumer:" + fileNumer + "counter:" + setBackgroundAudioSource.counter);
     var sourceFileName = "backGroundAudio_" + fileNumer +".mp3";
 
     var backGroundSource = document.getElementById("backGroundSource");
@@ -271,6 +275,7 @@ function isTimeOver(){
 
     var millis = Date.now() - startGameTime;
     var seconds = Math.floor(millis/1000);
+    //console.info("seconds:" + seconds);
 
     return (seconds >= GAME_TIMEOUT);
 
