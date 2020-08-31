@@ -132,10 +132,6 @@ function displayGameInfo(){
     document.getElementById("lblPlayer_B_Score").innerText = GameEngine.getPlayerScore(Players.PLAYER_B);
 
 }
-function onNextGenClick() {
-
-    playRound();
-}
 
 function playRound(){
 
@@ -208,6 +204,7 @@ function startNewGame() {
         alert("There is a game in progress");
     }
 }
+
 
 
 function handleBackgroundAudio(start){
@@ -293,7 +290,28 @@ function updateEngineersNames(element,lblToUpdate){
     {
         document.getElementById("playerB_displayNameDiv").innerHTML = "Player B / " + element.value;
     }
+}
 
+//-----------------------------------------------------------------------
+//=================== Method for Developer mode only ====================
+//-----------------------------------------------------------------------
+function newGame()
+{
+    var playerASelection = document.getElementById("playerASelectOption");
+    var playerBSelection = document.getElementById("playerBSelectOption");
+    if(playerASelection.selectedIndex == 0 || playerBSelection.selectedIndex == 0 )
+    {
+        alert("Invalid bot selection, could not start a new game");
+        return;
+    }
+    GameEngine.newGame(playerASelection.options[playerASelection.selectedIndex].value,playerBSelection.options[playerBSelection.selectedIndex].value);
+    alert("Dev mode: New game create...");
+}
+
+function onNextGenClick() {
+
+    displayGameInfo();
+    GameEngine.playRound();
 }
 
 

@@ -20,15 +20,15 @@
 
 -->
 
-    <script src="scripts/gameOfLifeCore.js"></script>
-    <script src="scripts/gameEngineSDK.js"></script>
-    <script src="scripts/gameEngine.js"></script>
+    <script src="scripts/core-js/gameOfLifeCore.js"></script>
+    <script src="scripts/core-js/gameEngineSDK.js"></script>
+    <script src="scripts/core-js/gameEngine.js"></script>
     <script src="scripts/display.js"></script>
     <script src="scripts/TimeCircles.js"></script>
 
     <!-- BOTs JS files -->
     <!-- <script src="scripts/bots/botsSample.js"></script> -->
-    <script src="scripts/bots/botExample.js"></script>
+    <script src="scripts/bots-js/botExample.js"></script>
 
 
     <style>
@@ -112,8 +112,12 @@
                 <div>
                     <button type="button" class="btn btn-primary" onclick="startNewGame();">Fight!</button>
                     <button type="button" class="btn btn-primary" onclick="stopGame();">Stop</button>
-                    <button type="button" class="btn btn-primary" onclick="displayBoard();" style="display: none;">Display current</button>
-                    <button type="button" class="btn btn-primary" onclick="onNextGenClick();" style="display: none;">Next</button>
+                </div>
+                <div style="display: block;">
+                    <br><label style="color: white;">Developer mode functions:</label><br>
+                    <button type="button" class="btn btn-primary" onclick="newGame();" >New Game</button>
+                    <button type="button" class="btn btn-primary" onclick="onNextGenClick();" >Next</button>
+                    <br><label id="lblGeneration" style="color: white;"></label>
                 </div>
 
 
@@ -144,7 +148,7 @@
 
 
         <div class="col-lg-12">
-            <label id="lblGeneration" ></label>
+            <!--label id="lblGeneration" ></label-->
         </div>
     </div>
 
