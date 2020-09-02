@@ -2,9 +2,9 @@ var gameIntervalID =  null;
 var gameInterval = 10;
 var GAME_TIMEOUT = 90; // 90 seconds per one game
 var startGameTime = null;
-var canvasWidth = 1200;
-var canvasHight = 700;
 var cellSize =  5; // default
+var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
+var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
 var fadeOutInterval;
 var useBackgroundAudio = true;// if true we will have background audio
 

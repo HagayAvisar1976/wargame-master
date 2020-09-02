@@ -11,6 +11,7 @@
       var dimensions = GameEngineSDK.getMatrixDimensions();
       var colStart = GameEngineSDK.currentGeneration() % dimensions.cols;
       return createGlider(dimensions.rows - 20,colStart);
+      //return createSpaceShip(dimensions.rows - 20,colStart);
     }
     else
     {
@@ -25,6 +26,17 @@
       [2, -1], [2, 0], [2, 1]];
 
     return setCellsAccordingToPosition(cellsPosition,rowStart,colStart);
+
+  }
+
+  function createSpaceShip(row,col) {
+    var cellsPosition = [      [-1,1],      [-1,3],
+                         [0, 0],
+                         [1, 0],
+                         [2, 0],             [2,3],
+                         [3, 0], [3, 1],[3, 2]];
+
+    return setCellsAccordingToPosition(cellsPosition,row,col);
 
   }
 

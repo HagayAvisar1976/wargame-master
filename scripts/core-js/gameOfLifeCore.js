@@ -16,7 +16,7 @@ function cell(row,col) {
 
 var LifeCore = {
 
-    _rows: 140,
+    _rows: 160,
     _columns: 240,
     _logicBoardMatrix : [],
     _generation : 0,
