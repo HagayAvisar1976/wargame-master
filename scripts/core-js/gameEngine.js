@@ -71,15 +71,7 @@ var GameEngine = {
         else{
             return "Player B";
         }
-        /*
-        if (this._playerA.score === SCORE_TO_WIN && this._playerB.score === SCORE_TO_WIN){
-            return "Draw";
-        }
-        if(this._playerA.score >= SCORE_TO_WIN) return this._playerA;
-        if(this._playerB.score >= SCORE_TO_WIN) return this._playerB;
 
-        return null;
-        */
     },
 
     playerMove : function(player,isMirror){
