@@ -62,14 +62,14 @@ var GameEngine = {
     getTheWinner: function () {
 
         if (this._playerA.score === this._playerB.score){
-            return "Draw";
+            return {"winner":"","loser":""};
         }
         if(this._playerA.score > this._playerB.score)
         {
-            return "Player A";
+            return {"winner":this._playerA._botExe.getBotName(),"loser":this._playerB._botExe.getBotName()};
         }
         else{
-            return "Player B";
+            return {"winner":this._playerB._botExe.getBotName(),"loser":this._playerA._botExe.getBotName()};
         }
 
     },

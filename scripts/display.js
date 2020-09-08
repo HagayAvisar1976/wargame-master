@@ -1,6 +1,6 @@
 var gameIntervalID =  null;
 var gameInterval = 10;
-var GAME_TIMEOUT = 90; // 90 seconds per one game
+var GAME_TIMEOUT = 10; // 90 seconds per one game
 var startGameTime = null;
 var cellSize =  5; // default
 var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
@@ -147,7 +147,6 @@ function playRound(){
 
 function endGameOperations() {
     stopGame();
-    displayGameOverOnBoard();
     displayGameResults();
     handleBackgroundAudio(false);
 
@@ -155,26 +154,21 @@ function endGameOperations() {
 
 function displayGameResults()
 {
-    var winner = GameEngine.getTheWinner();
-    var message;
-    if (winner =="Draw")
+    var results = GameEngine.getTheWinner();
+
+    document.getElementById("drawDivSection").style.display = "none";
+    document.getElementById("resultDivSection").style.display = "none";
+    if(results.winner === "" && results.loser ===""){
+        document.getElementById("drawDivSection").style.display = "block";
+    }
+    else
     {
-        message = "No Winner - Draw";
+        document.getElementById("resultDivSection").style.display = "block";
+        document.getElementById("lblwinnerText").innerText = results.winner;
+        document.getElementById("lblloserText").innerText = results.loser;
     }
-    else {
-        message= "The winner is: " + winner;
-    }
-    document.getElementById("lblWinnerAnnouncement").style.display = "block";
-    document.getElementById("lblWinnerAnnouncement").innerText = message;
 
-}
-
-function displayGameOverOnBoard(){
-    var c = document.getElementById("matrixCanvas");
-    var ctx = c.getContext("2d");
-
-    var img = document.getElementById("imgGameOver");
-    ctx.drawImage(img,(canvasWidth/2) -150,(canvasHight/2)-150,300,300);
+    document.getElementById("resultDisplaySection").style.display = "block";
 
 }
 
@@ -191,6 +185,7 @@ function startNewGame() {
         }
         GameEngine.newGame(playerASelection.options[playerASelection.selectedIndex].value,playerBSelection.options[playerBSelection.selectedIndex].value);
         document.getElementById("lblWinnerAnnouncement").style.display = "none"; // clean announcements label
+        document.getElementById("resultDisplaySection").style.display = "none";
 
         gameIntervalID = setInterval(playRound, gameInterval);
         startGameTime = Date.now();

@@ -38,6 +38,38 @@
             color: white;
             font-size: medium;
         }
+        .game-results-display{
+            color: white;
+            font-size: medium;
+            width: 1200px;
+            height: 100%;
+            position: absolute;
+            z-index: 100;
+            background: black;
+            opacity: 0.6;
+        }
+        .game-over-img{
+            width: 35%;
+            margin-right: auto;
+            margin-left: auto;
+            display: block;
+        }
+        .winner-img{
+            position: relative;
+            width: 50%;
+            height:50%;
+        }
+        .loser-img {
+            position: relative;
+            width: 50%;
+            height:50%;
+        }
+        .winner-loser-text-display{
+            font-family: cursive;
+            font-size: 40px;
+            font-weight: bold;
+            margin: 10px;
+        }
     </style>
 
 
@@ -132,7 +164,29 @@
 
             </div>
 
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="position: relative;">
+
+                <div class="game-results-display" id="resultDisplaySection" style="display: none;">
+                    <img id="imgGameOver" src="images/gameOver.jpg" class="game-over-img" >
+                    <div id="drawDivSection" style="display: none;"><label style="font-size: 100px; margin-right: auto;margin-left: auto;width: 50%;display: block"> IT'S A TIE!!!</label></div>
+                    <div id="resultDivSection" style="display: none;">
+                        <div class="row">
+                            <div class="col-lg-6"><img src="images/DanceBot-3-LG.gif" class="winner-img" ></div>
+                            <div class="col-lg-6">
+                                <span class="winner-loser-text-display">Winner:</span>
+                                <div><label id="lblwinnerText" class="winner-loser-text-display"></label></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span class="winner-loser-text-display">Loser:</span>
+                                <div><label id="lblloserText" class="winner-loser-text-display"></label></div>
+                            </div>
+                            <div class="col-lg-6" ><img src="images/Robot_icon_broken.svg.png" class="loser-img"  ></div>
+                        </div>
+                    </div>
+
+                </div>
 
                 <div class="player-info-text" style="text-align: center; font-family: fantasy; font-weight: bold" id="playerA_displayNameDiv">Player A</div>
                 <canvas id="matrixCanvas"  style="border-style: solid; background-color: black;"></canvas>
@@ -156,7 +210,6 @@
     </div>
 
     <img id="imgStar" src="images/animated-white-sky-star.gif" style="z-index: 1000; position: fixed; " width="20px;" height="20px;">
-    <img id="imgGameOver" src="images/gameOver.jpg" style="z-index: 1000;" hidden="hidden">
 
 
 
