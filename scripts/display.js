@@ -1,6 +1,6 @@
 var gameIntervalID =  null;
 var gameInterval = 10;
-var GAME_TIMEOUT = 10; // 90 seconds per one game
+var GAME_TIMEOUT = 90; // 90 seconds per one game
 var startGameTime = null;
 var cellSize =  5; // default
 var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
