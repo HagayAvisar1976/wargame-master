@@ -139,7 +139,7 @@ function playRound(){
 
     GameEngine.playRound();
 
-    if(isTimeOver() /*|| GameEngine.checkForWinners()!= null)*/){
+    if(isTimeOver()){
         endGameOperations();
     }
 
@@ -267,7 +267,6 @@ function isTimeOver(){
 
     var millis = Date.now() - startGameTime;
     var seconds = Math.floor(millis/1000);
-    //console.info("seconds:" + seconds);
 
     return (seconds >= GAME_TIMEOUT);
 
