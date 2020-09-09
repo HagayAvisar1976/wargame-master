@@ -6,7 +6,7 @@ var cellSize =  5; // default
 var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
 var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
 var fadeOutInterval;
-var useBackgroundAudio = true;// if true we will have background audio
+var useBackgroundAudio = false;// if true we will have background audio
 
 
 function onLoad() {

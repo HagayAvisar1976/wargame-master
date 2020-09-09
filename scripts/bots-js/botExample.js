@@ -12,7 +12,6 @@
       var dimensions = GameSDK.getMatrixDimensions();
       var colStart = GameSDK.getCurrentGeneration() % dimensions.cols;
       return createGlider(dimensions.rows - 20,colStart);
-      //return createSpaceShip(dimensions.rows - 20,colStart);
     }
     else
     {
@@ -30,16 +29,6 @@
 
   }
 
-  function createSpaceShip(row,col) {
-    var cellsPosition = [      [-1,1],      [-1,3],
-                         [0, 0],
-                         [1, 0],
-                         [2, 0],             [2,3],
-                         [3, 0], [3, 1],[3, 2]];
-
-    return setCellsAccordingToPosition(cellsPosition,row,col);
-
-  }
 
   GameSDK.regiterBot(botName,engineers,attackerBotLogic);
 
