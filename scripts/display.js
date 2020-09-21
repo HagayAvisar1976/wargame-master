@@ -7,6 +7,8 @@ var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
 var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
 var fadeOutInterval;
 var useBackgroundAudio = false;// if true we will have background audio
+var playerAColor = "#11ffcc";
+var playerBColor = "#ff3333"
 
 
 function onLoad() {
@@ -81,7 +83,6 @@ function drawCells() {
     ctx.fillStyle = "white";
     ctx.strokeStyle = "#999";
 
-    //ctx.clearRect(cellSize,cellSize,canvasWidth-(cellSize*2),canvasHight-(cellSize*2));
     ctx.clearRect(0,0,canvasWidth,canvasHight);
 
     // draw grid lines
@@ -98,7 +99,27 @@ function drawCells() {
         }
     }
 
-    //ctx.fillRect(239*cellSize, 69*cellSize, cellSize, cellSize); middle
+    drawWalls();
+}
+
+function drawWalls(){
+
+    drawPlayerWall(0, playerAColor);
+    drawPlayerWall(LifeCore.getRowsNumber() - 1, playerBColor);
+}
+
+function drawPlayerWall(row,color){
+
+    var c = document.getElementById("matrixCanvas");
+    var ctx = c.getContext("2d");
+    ctx.fillStyle = color;
+
+    var halfCellSize  = cellSize / 2;
+    for (var col = 0; col < LifeCore.getColmunsNumber(); col++) {
+
+        ctx.lineWidth = 1;
+        ctx.fillRect(col * cellSize, row * cellSize, halfCellSize, halfCellSize);
+    }
 
 }
 
@@ -120,6 +141,7 @@ function drawGridLines() {
         ctx.lineTo(canvasWidth, n+.5);
         ctx.stroke();
     }
+
 }
 
 function displayGameInfo(){
