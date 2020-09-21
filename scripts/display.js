@@ -6,7 +6,7 @@ var cellSize =  5; // default
 var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
 var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
 var fadeOutInterval;
-var useBackgroundAudio = false;// if true we will have background audio
+var useBackgroundAudio = true;// if true we will have background audio
 var playerAColor = "#11ffcc";
 var playerBColor = "#ff3333"
 
@@ -85,7 +85,6 @@ function drawCells() {
 
     ctx.clearRect(0,0,canvasWidth,canvasHight);
 
-    // draw grid lines
     drawGridLines();
 
     // draw cells
@@ -114,7 +113,7 @@ function drawPlayerWall(row,color){
     var ctx = c.getContext("2d");
     ctx.fillStyle = color;
 
-    var halfCellSize  = cellSize / 2;
+    var halfCellSize  = cellSize / 2; // make wall line a little thiner..
     for (var col = 0; col < LifeCore.getColmunsNumber(); col++) {
 
         ctx.lineWidth = 1;

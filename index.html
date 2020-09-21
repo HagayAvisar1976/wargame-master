@@ -7,18 +7,12 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/TimeCircles.css" />
+    <link rel="stylesheet" href="css/game-of-life.css"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
-    <!--
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
--->
 
     <script src="scripts/core-js/gameOfLifeCore.js"></script>
     <script src="scripts/core-js/gameEngineSDK.js"></script>
@@ -29,58 +23,8 @@
 
 
     <!-- BOTs JS files -->
-    <!-- <script src="scripts/bots/botsSample.js"></script> -->
     <script src="scripts/bots-js/botsUtils.js"></script>
     <script src="scripts/bots-js/botExample.js"></script>
-
-
-    <style>
-        .player-info-text {
-            color: white;
-            font-size: medium;
-        }
-        .game-results-display{
-            color: white;
-            font-size: medium;
-            width: 1200px;
-            height: 100%;
-            position: absolute;
-            z-index: 100;
-            background: black;
-            opacity: 0.7;
-        }
-        .game-over-img{
-            width: 35%;
-            margin-right: auto;
-            margin-left: auto;
-            display: block;
-        }
-        .winner-img{
-            position: relative;
-            width: 50%;
-            height:50%;
-        }
-        .loser-img {
-            position: relative;
-            width: 50%;
-            height:50%;
-        }
-        .winner-loser-text-display{
-            font-family: cursive;
-            font-size: 40px;
-            font-weight: bold;
-            margin: 10px;
-        }
-        .player-name-display{
-            font-size:25px;
-            text-align: left;
-            font-family: visitor, consolas, monospace, sans-serif;
-            padding: 0px;
-            font-weight: bold;
-            padding: 0px;
-        }
-
-    </style>
 
 
 </head>
@@ -89,7 +33,6 @@
 
 
 <div ng-app="">
-
 
 
     <div class="container-fluid">
@@ -207,28 +150,17 @@
     </div>
 
 
-    <div class="row" style="height: 50px;padding: 10px;">
+    <div>
         <audio id="backGroundAudio">
             <source id="backGroundSource"  src="">
         </audio>
-
-
-        <div class="col-lg-12">
-            <!--label id="lblGeneration" ></label-->
-        </div>
     </div>
 
     <img id="imgStar" src="images/animated-white-sky-star.gif" style="z-index: 1000; position: fixed; " width="20px;" height="20px;">
 
 
-
 </div>
 
-<script>
-
-
-
-</script>
 
 </body>
 </html>

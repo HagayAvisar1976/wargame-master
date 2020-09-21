@@ -1,0 +1,44 @@
+.player-info-text {
+  color: white;
+  font-size: medium;
+}
+.game-results-display{
+  color: white;
+  font-size: medium;
+  width: 1200px;
+  height: 100%;
+  position: absolute;
+  z-index: 100;
+  background: black;
+  opacity: 0.7;
+}
+.game-over-img{
+  width: 35%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+.winner-img{
+  position: relative;
+  width: 50%;
+  height:50%;
+}
+.loser-img {
+  position: relative;
+  width: 50%;
+  height:50%;
+}
+.winner-loser-text-display{
+  font-family: cursive;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 10px;
+}
+.player-name-display{
+  font-size:25px;
+  text-align: left;
+  font-family: visitor, consolas, monospace, sans-serif;
+  padding: 0px;
+  font-weight: bold;
+  padding: 0px;
+}
