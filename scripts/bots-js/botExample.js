@@ -22,8 +22,8 @@
   function createGlider (rowStart,colStart) {
 
     var cellsPosition = [[0, 0],
-      [1, 1],
-      [2, -1], [2, 0], [2, 1]];
+                                 [1, 1],
+                [2, -1], [2, 0], [2, 1]];
 
     return setCellsAccordingToPosition(cellsPosition,rowStart,colStart);
 
@@ -88,5 +88,6 @@
   GameSDK.regiterBot(botName,engineers,emptyBotlogic);
 
 })();
+
 
 
