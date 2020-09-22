@@ -8,10 +8,21 @@ var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
 var fadeOutInterval;
 var playerAColor = "#11ffcc";
 var playerBColor = "#ff3333"
+var musicFiles = [
+    {file: 'pirates_of_the_caribbean.mp3'},
+    {file: 'terminator.mp3'},
+    {file: 'mission_impossible.mp3'},
+    {file: 'games_of_thrones.mp3'},
+    {file: 'battlestar_galactica.mp3'},
+    {file: 'dark_knight_rises.mp3'},
+    {file: 'fury_road.mp3'},
+    {file: 'transformers.mp3'},
+    {file: 'wonder_woman.mp3'}];
 
 
 function onLoad() {
 
+    localStorage.clear();
     var c = document.getElementById("matrixCanvas");
     c.width = canvasWidth;
     c.height = canvasHight;
@@ -260,16 +271,15 @@ function FadeOutBackgroundAudio() {
 
 function setBackgroundAudioSource() {
 
-    (setBackgroundAudioSource.counter === undefined || setBackgroundAudioSource.counter == null ) ? setBackgroundAudioSource.counter = 0 : setBackgroundAudioSource.counter++;
-
-    const numberOfAudioFiles = 4;
-
-    var fileNumer = (setBackgroundAudioSource.counter % numberOfAudioFiles)+1; //Math.floor(Math.random() * 2) + 1;
-    console.info("fileNumer:" + fileNumer + "counter:" + setBackgroundAudioSource.counter);
-    var sourceFileName = "backGroundAudio_" + fileNumer +".mp3";
+    var m = (localStorage.getItem('game-of-life-music-index') || 0) % musicFiles.length;
+    if(m<0 || m> musicFiles.length)
+        alert("Invalid background music file index:"+ m );
 
     var backGroundSource = document.getElementById("backGroundSource");
-    backGroundSource.src = "./audio/" + sourceFileName;
+    backGroundSource.src = "./audio/" + musicFiles[m].file;
+
+    m = (m + 1) % musicFiles.length;
+    localStorage.setItem('game-of-life-music-index', m);
 }
 
 function stopGame(){
