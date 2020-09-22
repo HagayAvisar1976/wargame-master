@@ -6,7 +6,6 @@ var cellSize =  5; // default
 var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
 var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
 var fadeOutInterval;
-var useBackgroundAudio = true;// if true we will have background audio
 var playerAColor = "#11ffcc";
 var playerBColor = "#ff3333"
 
@@ -225,7 +224,7 @@ function startNewGame() {
 
 function handleBackgroundAudio(start){
 
-    if(useBackgroundAudio == false) return; // do nothing if define without background audio.
+    if(document.getElementById("useBackgroundAudio").checked === false) return;
 
     var backGroundAudio = document.getElementById("backGroundAudio");
     if(start == true){
@@ -279,7 +278,6 @@ function stopGame(){
         clearInterval(gameIntervalID);
         gameIntervalID = null;
         $(".stopWatch").TimeCircles().stop();
-        //$(".stopWatch").TimeCircles().destroy();
     }
 
 }
@@ -307,9 +305,18 @@ function updateEngineersNames(element,lblToUpdate){
     }
 }
 
+function gameTimeSelectionChange(element){
+
+    updateNewGameTime(element.value);
+}
+
+function updateNewGameTime(newTime){
+    GAME_TIMEOUT = newTime;
+}
 //-----------------------------------------------------------------------
 //=================== Method for Developer mode only ====================
 //-----------------------------------------------------------------------
+
 function newGame()
 {
     var playerASelection = document.getElementById("playerASelectOption");
