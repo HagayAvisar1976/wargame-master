@@ -18,6 +18,7 @@
     <script src="scripts/core-js/gameEngineSDK.js"></script>
     <script src="scripts/core-js/gameSDK.js"></script>
     <script src="scripts/core-js/gameEngine.js"></script>
+    <script src="scripts/ui-js/icons-handler.js"></script>
     <script src="scripts/display.js"></script>
     <script src="scripts/TimeCircles.js"></script>
 
@@ -103,7 +104,7 @@
                 </div>
 
                 <br>
-                <!-- advanced options-->
+                <!-- Developer options-->
                 <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#devModeOptions" >Developer Options</button>
                 <div id="devModeOptions" class="collapse">
                     <br><label style="color: white;">Developer mode functions:</label><br>
@@ -161,9 +162,16 @@
 
                 </div>
 
-                <div class="player-name-display" style="color: rgb(17,255,204);" id="playerA_displayNameDiv">Player A</div>
+                <div id="playerADisplayPanel">
+                    <label class="player-name-display" style="color: rgb(17,255,204);" id="playerA_displayName">Player A</label>
+                    <img src="" id="playerAIcon" class="player-icon-display"  >
+                </div>
                 <canvas id="matrixCanvas"  style="border-style: solid; background-color: black;padding: 0px;"></canvas>
-                <div class="player-name-display" style="color: rgb(255,51,51);" id="playerB_displayNameDiv">Player B</div>
+                <div id="playerBDisplayPanel">
+                    <label class="player-name-display" style="color: rgb(255,51,51);" id="playerB_displayName">Player B</label>
+                    <img src="" id="playerBIcon" class="player-icon-display" >
+                </div>
+
             </div>
         </div>
 

@@ -26,6 +26,8 @@ function onLoad() {
     var c = document.getElementById("matrixCanvas");
     c.width = canvasWidth;
     c.height = canvasHight;
+    setPlayersDisplayPanelWidth(canvasWidth);
+
 
     drawGridLines();
 
@@ -224,6 +226,8 @@ function startNewGame() {
         $(".stopWatch").TimeCircles().start();
 
         handleBackgroundAudio(true);
+
+        chooseIcon4Players();
     }
     else
     {
@@ -307,11 +311,11 @@ function updateEngineersNames(element,lblToUpdate){
     document.getElementById(lblToUpdate).innerText = GameEngineSDK.getBotEngineers(element.value).toString();
 
     if(lblToUpdate === "playerAEngineers"){
-        document.getElementById("playerA_displayNameDiv").innerHTML = "Player A / " + element.value;
+        document.getElementById("playerA_displayName").innerHTML = "Player A / " + element.value;
     }
     else
     {
-        document.getElementById("playerB_displayNameDiv").innerHTML = "Player B / " + element.value;
+        document.getElementById("playerB_displayName").innerHTML = "Player B / " + element.value;
     }
 }
 
@@ -322,6 +326,7 @@ function gameTimeSelectionChange(element){
 
 function updateNewGameTime(newTime){
     GAME_TIMEOUT = newTime;
+    //$(".stopWatch").TimeCircles()
 }
 //-----------------------------------------------------------------------
 //=================== Method for Developer mode only ====================

@@ -41,4 +41,10 @@
   padding: 0px;
   font-weight: bold;
   padding: 0px;
+  float: left;
+}
+.player-icon-display{
+  height: 35px;
+  display: inline-block;
+  float: right;
 }
