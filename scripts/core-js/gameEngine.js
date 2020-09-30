@@ -24,6 +24,8 @@ var GameEngine = {
 
         var botA = GameEngineSDK.getBot(nameA);
         var botB = GameEngineSDK.getBot(nameB);
+        botA.initBudget();
+        botB.initBudget();
 
         this._playerA = new playerBot(botA)
         this._playerB = new playerBot(botB)
@@ -158,42 +160,6 @@ function playerBot (botExe) {
         }
 
         return cellsToUpdate;
-
-        /*
-        // will call to a player sdk function that return an array of cells
-        var cellsToUpdate = [];
-
-        var col = 0;
-        if (LifeCore.getGeneration() == 3) {
-            cellsToUpdate = this.setCheptomino();
-
-            /*
-            col = 10;
-            cellsToUpdate.push(new cell((LifeCore.getRowsNumber() / 2) + 3, 0));
-            cellsToUpdate.push(new cell((LifeCore.getRowsNumber() / 2) + 3, 0));
-            //cellsToUpdate.push(new cell(10, col + 1));
-            //cellsToUpdate.push(new cell(10, col + 2));
-            //cellsToUpdate.push(new cell(10, col + 3));
-            cellsToUpdate.push(new cell((LifeCore.getRowsNumber() / 2) + 3, 0));
-            cellsToUpdate.push(new cell(0, 0));
-            cellsToUpdate.push(new cell(0, 50));
-            cellsToUpdate.push(new cell(0, 100));
-            cellsToUpdate.push(new cell(0, 150));
-            cellsToUpdate.push(new cell(0, 200));
-            cellsToUpdate.push(new cell(0, 239));
-
-            cellsToUpdate.push(new cell(1, 0));
-            cellsToUpdate.push(new cell(1, 50));
-            cellsToUpdate.push(new cell(1, 100));
-            cellsToUpdate.push(new cell(1, 150));
-            cellsToUpdate.push(new cell(1, 200));
-            cellsToUpdate.push(new cell(1, 239));
-            cellsToUpdate.push(new cell((LifeCore.getRowsNumber() / 2) + 3, 0));
-            *
-        }
-
-        return cellsToUpdate;
-    */
 
     }
 

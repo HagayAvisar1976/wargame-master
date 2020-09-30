@@ -81,6 +81,10 @@ function playerBotExe(botName, engineers,logicFunction){
 
     this.getBotEngineers = function () {
         return this._engineers;
+    },
+
+    this.initBudget = function () {
+        this._budget = 0;
     }
 
 }
