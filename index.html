@@ -54,14 +54,14 @@
                     <tr>
                         <td>Name:</td>
                         <td>
-                            <select id="playerASelectOption"  onchange="updateEngineersNames(this,'playerAEngineers');" style="color: black;">
+                            <select id="playerASelectOption"  onchange="onPlayerSelectionChange(this,'PLAYER_A');" style="color: black;">
                                 <option >***Select BOT***</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Score:</td>
-                        <td><label id="lblPlayer_A_Score"/></td>
+                        <td><label id="lblPlayer_A_Score" /></td>
                     </tr>
                     <tr>
                         <td>Team members:</td>
@@ -76,7 +76,7 @@
                     <tr>
                         <td>Name:</td>
                         <td>
-                            <select id="playerBSelectOption" onchange="updateEngineersNames(this,'playerBEngineers');" style="color: black;">
+                            <select id="playerBSelectOption" onchange="onPlayerSelectionChange(this,'PLAYER_B');" style="color: black;">
                                 <option>***Select BOT***</option>
                             </select>
                         </td>

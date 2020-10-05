@@ -8,6 +8,8 @@ var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
 var fadeOutInterval;
 var playerAColor = "#11ffcc";
 var playerBColor = "#ff3333"
+var PLAYER_A = "PLAYER_A";
+var PLAYER_B = "PLAYER_B";
 var musicFiles = [
     {file: 'pirates_of_the_caribbean.mp3'},
     {file: 'terminator.mp3'},
@@ -227,7 +229,7 @@ function startNewGame() {
 
         handleBackgroundAudio(true);
 
-        chooseIcon4Players();
+        chooseRndIcon4Players();
     }
     else
     {
@@ -306,16 +308,18 @@ function isTimeOver(){
 }
 
 
-function updateEngineersNames(element,lblToUpdate){
+function onPlayerSelectionChange(element,lblToUpdate){
 
-    document.getElementById(lblToUpdate).innerText = GameEngineSDK.getBotEngineers(element.value).toString();
-
-    if(lblToUpdate === "playerAEngineers"){
+    if(lblToUpdate === PLAYER_A){
+        document.getElementById("playerAEngineers").innerText = GameEngineSDK.getBotEngineers(element.value).toString();
         document.getElementById("playerA_displayName").innerHTML = "Player A / " + element.value;
+        setIcon4Players(element.value, PLAYER_A);
     }
     else
     {
+        document.getElementById("playerBEngineers").innerText = GameEngineSDK.getBotEngineers(element.value).toString();
         document.getElementById("playerB_displayName").innerHTML = "Player B / " + element.value;
+        setIcon4Players(element.value,PLAYER_B);
     }
 }
 
@@ -353,6 +357,13 @@ function onNextGenClick() {
 
 
 /*
+
+BUGS that I need to fix:
+//////////////////////////
+- bot budget needs to move from SDK to game engine while creating new bot game object instead of the registered object.
+ registered bot should only save fixed data (name, function, engineers) score and budget should be in game engine object.
+//////////////////////////
+
 http://conwaylife.appspot.com/library
 - fix the watch (maybe find other component)
 - design the game UX
