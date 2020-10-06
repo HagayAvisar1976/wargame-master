@@ -24,8 +24,8 @@ var GameEngine = {
 
         var botA = GameEngineSDK.getBot(nameA);
         var botB = GameEngineSDK.getBot(nameB);
-        botA.initBudget();
-        botB.initBudget();
+        //botA.initBudget();
+        //botB.initBudget();
 
         this._playerA = new playerBot(botA)
         this._playerB = new playerBot(botB)
@@ -49,6 +49,8 @@ var GameEngine = {
 
         // increase budget for all players
         this.updatePlayersBudget(playerA,playerB);
+
+        //delete hits?
 
         // If i call this method after player move, we will not see his move on screen, the next gen method will change it and calculate the next gen
         LifeCore.nextGenerationMatrix();
@@ -129,6 +131,17 @@ var GameEngine = {
             var mirrorRow = (LifeCore.getRowsNumber() -1) - cell.row;
             cell.row = mirrorRow;
         })
+    },
+
+    getPlayerBudget : function (botname) {
+        if(this._playerA.getPlayerBotName() === botname){
+            return this._playerA.getBudget();
+        }
+        if(this._playerB.getPlayerBotName() === botname){
+            return this._playerB.getBudget();
+        }
+        console.error("you are trying to get budget for a bot that is not playing right now {" + botname + "}");
+        return null;
     }
 
 }
@@ -137,14 +150,17 @@ var GameEngine = {
 function playerBot (botExe) {
 
     this._botExe = botExe;
-    this.score = 0,
+    this.score = 0;
+    this.budget = 0;
 
     this.updateBudget = function (budgetTransaction) {
-        this._botExe.updateBotBudget(budgetTransaction);
+        //this._botExe.updateBotBudget(budgetTransaction);
+        this.budget+=budgetTransaction;
     },
 
     this.getBudget = function () {
-        return this._botExe.getBotBudget();
+        //return this._botExe.getBotBudget();
+        return this.budget;
     },
 
     this.updateScore = function (toAdd) {
@@ -161,6 +177,10 @@ function playerBot (botExe) {
 
         return cellsToUpdate;
 
+    },
+
+    this.getPlayerBotName = function () {
+        return this._botExe.getBotName();
     }
 
 }

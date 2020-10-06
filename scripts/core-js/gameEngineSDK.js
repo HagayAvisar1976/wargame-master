@@ -51,9 +51,9 @@ var GameEngineSDK = {
 
     getMyBudget: function(botName) {
 
-        var bot = this.getBot(botName);
-        return bot.getBotBudget();
-
+        return  GameEngine.getPlayerBudget(botName);
+        //var bot = this.getBot(botName);
+        //return bot.getBotBudget();
     }
 
 }
@@ -63,16 +63,21 @@ function playerBotExe(botName, engineers,logicFunction){
     this._botName = botName;
     this._engineers = engineers;
     this._logicFunction = logicFunction;
-    this._budget = 0;
+    //this._budget = 0;
 
+    /*
     this.updateBotBudget =function (budgetTransaction) {
         this._budget+=budgetTransaction;
-
     },
 
+     */
+
+        /*
     this.getBotBudget = function () {
         return this._budget;
     },
+
+         */
 
     this.getBotName = function () {
         return this._botName;
@@ -81,10 +86,12 @@ function playerBotExe(botName, engineers,logicFunction){
 
     this.getBotEngineers = function () {
         return this._engineers;
-    },
-
+    }
+        /*
     this.initBudget = function () {
         this._budget = 0;
     }
+
+         */
 
 }

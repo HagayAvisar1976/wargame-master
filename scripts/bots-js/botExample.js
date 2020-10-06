@@ -12,6 +12,8 @@
       var dimensions = GameSDK.getMatrixDimensions();
       var colStart = GameSDK.getCurrentGeneration() % dimensions.cols;
       return createGlider(dimensions.rows - 20,colStart);
+      //return createSpaceShip(dimensions.rows - 20,colStart);
+
     }
     else
     {
@@ -27,6 +29,23 @@
 
     return setCellsAccordingToPosition(cellsPosition,rowStart,colStart);
 
+  }
+
+  function createSpaceShip(row,col) {
+    /*
+    var cellsPosition = [      [-1,1],      [-1,3],
+      [0, 0],
+      [1, 0],
+      [2, 0],             [2,3],
+      [3, 0], [3, 1],[3, 2]];
+
+     */
+
+    var cellsPosition = [[5, 5], [5, 4], [5, 3], [4, 5], [4, 2], [3, 5], [2, 5], [2, 1],
+      [1, 5], [0, 4], [0, 2]]
+
+
+    return setCellsAccordingToPosition(cellsPosition,row,col);
   }
 
 
@@ -45,6 +64,7 @@
 
   function defenderLogic(){
     var budget = GameSDK.getMyBudget(defenderBotName);
+    //console.info("defnder budget is" + budget);
 
     if(budget >=4 && (GameSDK.getCurrentGeneration() % 4) == 0) {
       var colStart = GameSDK.getCurrentGeneration() %  GameSDK.getMatrixDimensions().cols;
