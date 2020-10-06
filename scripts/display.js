@@ -62,14 +62,18 @@ function hitListerer(e) {
     ctx.lineWidth = 1;
     ctx.fillRect(e.detail.col*cellSize, e.detail.row*cellSize, cellSize, cellSize);
 
-
+    playHitSound();
+    /*
     if(callingBoomToMuch(hitListerer.lastCallToBoom) == false){
         playBooomSound();
         hitListerer.lastCallToBoom = Date.now();
     }
 
+     */
+
 }
 
+/*
 function callingBoomToMuch(lastcall) {
     if(lastcall === undefined|| lastcall == null){
         return false;
@@ -89,6 +93,8 @@ function playBooomSound(){
 
     setTimeout(function () {myAudio.pause();},1000);
 }
+
+ */
 
 function drawCells() {
 

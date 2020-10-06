@@ -27,8 +27,8 @@ function chooseRndIcon4Players(){
 
   if(icon4EachBot) return; // if icon for each bot is on, this method is doing nothing.
 
-  var iconFile1 = Math.floor(Math.random() * iconsFiles.length) + 1;
-  var iconFile2 = Math.floor(Math.random() * iconsFiles.length) + 1;
+  var iconFile1 = Math.floor(Math.random() * iconsFiles.length);
+  var iconFile2 = Math.floor(Math.random() * iconsFiles.length);
 
   document.getElementById("playerAIcon").src = "./images/icons/" + iconsFiles[iconFile1].file;
   document.getElementById("playerBIcon").src = "./images/icons/" + iconsFiles[iconFile2].file;
