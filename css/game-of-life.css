@@ -43,6 +43,13 @@
   padding: 0px;
   float: left;
 }
+.player-score-display{
+  font-size:25px;
+  font-family: visitor, consolas, monospace, sans-serif;
+  font-weight: bold;
+  padding-right: 10px;
+  float: right;
+}
 .player-icon-display{
   height: 35px;
   display: inline-block;

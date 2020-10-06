@@ -305,7 +305,7 @@ function stopGame(){
         clearInterval(gameIntervalID);
         gameIntervalID = null;
         $(".stopWatch").TimeCircles().stop();
-        stopBackgroundMusic();
+        //stopBackgroundMusic(); // need to fix bug when pressing stop button to stop the music as well... this is not the way :-)
     }
 
 }
