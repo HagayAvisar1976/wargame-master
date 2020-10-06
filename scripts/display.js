@@ -5,11 +5,12 @@ var startGameTime = null;
 var cellSize =  5; // default
 var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
 var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
-var fadeOutInterval;
+//var fadeOutInterval;
 var playerAColor = "#11ffcc";
 var playerBColor = "#ff3333"
 var PLAYER_A = "PLAYER_A";
 var PLAYER_B = "PLAYER_B";
+/*
 var musicFiles = [
     {file: 'pirates_of_the_caribbean.mp3'},
     {file: 'terminator.mp3'},
@@ -20,6 +21,8 @@ var musicFiles = [
     {file: 'fury_road.mp3'},
     {file: 'transformers.mp3'},
     {file: 'wonder_woman.mp3'}];
+
+ */
 
 
 function onLoad() {
@@ -189,7 +192,7 @@ function playRound(){
 function endGameOperations() {
     stopGame();
     displayGameResults();
-    handleBackgroundAudio(false);
+    stopBackgroundMusic();
 
 }
 
@@ -233,7 +236,7 @@ function startNewGame() {
         $(".stopWatch").TimeCircles({timer:GAME_TIMEOUT, start:false, time: { Days: { show: false }, Hours: { show: false }, Minutes:{show:false}}});
         $(".stopWatch").TimeCircles().start();
 
-        handleBackgroundAudio(true);
+        startBackgroundMusic();
 
         chooseRndIcon4Players();
     }
@@ -244,7 +247,7 @@ function startNewGame() {
 }
 
 
-
+/*
 function handleBackgroundAudio(start){
 
     if(document.getElementById("useBackgroundAudio").checked === false) return;
@@ -294,12 +297,15 @@ function setBackgroundAudioSource() {
     localStorage.setItem('game-of-life-music-index', m);
 }
 
+ */
+
 function stopGame(){
 
     if(gameIntervalID!=null && gameIntervalID!=undefined){
         clearInterval(gameIntervalID);
         gameIntervalID = null;
         $(".stopWatch").TimeCircles().stop();
+        stopBackgroundMusic();
     }
 
 }
