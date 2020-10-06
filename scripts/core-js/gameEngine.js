@@ -45,12 +45,13 @@ var GameEngine = {
         // - Display  board
 
         // - check hits & update score
-        this.check4Hits(playerA,playerB);
+        var hits = this.check4Hits(playerA,playerB);
 
         // increase budget for all players
         this.updatePlayersBudget(playerA,playerB);
 
-        //delete hits?
+        //delete hits so it will hit the wall and be destroyed instead of evolve on the riverl wall creating endless points.
+        this.deleteScoringPixels(hits);
 
         // If i call this method after player move, we will not see his move on screen, the next gen method will change it and calculate the next gen
         LifeCore.nextGenerationMatrix();
@@ -61,6 +62,20 @@ var GameEngine = {
         // play move for player B
         this.playerMove(playerB,true);
 
+    },
+
+    deleteScoringPixels : function(cells){
+
+        // this method kills all the cells that hits the wall and all of it's neighbors, basically destrying the shape that hit the wall
+        // so it will not evolve endless of rivel wall.
+        for(var i = 0; i < cells.length;i++)
+        {
+            var neighbors = LifeCore.getNeighbors(cells[i].row,cells[i].col);
+            for (var x = 0; x < neighbors.length; x++) {
+                LifeCore.setLifeMatrixCell(neighbors[x],LifeStates.DEAD);
+            }
+            LifeCore.setLifeMatrixCell(cells[i],LifeStates.DEAD);
+        }
     },
 
     getTheWinner: function () {
@@ -104,19 +119,23 @@ var GameEngine = {
 
     check4Hits: function (playerA, playerB) {
 
-        this.checkPlayerHits(playerA,LifeCore.getRowsNumber() - 1); // check if there is a live cell at the last row, increase score for A
-        this.checkPlayerHits(playerB,0);// check if there is a live cell at the first row, increase score for B
+        var playerAHits = this.checkPlayerHits(playerA,LifeCore.getRowsNumber() - 1); // check if there is a live cell at the last row, increase score for A
+        var playerBHits = this.checkPlayerHits(playerB,0);// check if there is a live cell at the first row, increase score for B
+        return playerAHits.concat(playerBHits);
     },
 
     checkPlayerHits: function(player, rowToCheck){
 
+        var hits = [];
         for(var i=0; i<LifeCore.getColmunsNumber(); i++){
             if(LifeCore.getCellValue(rowToCheck,i) === LifeStates.ALIVE){
                 player.updateScore(1);
                 this.fireHitEvent(rowToCheck,i);
-                LifeCore.setLifeMatrixCell(new cell(rowToCheck,i), LifeStates.DEAD);
+                //LifeCore.setLifeMatrixCell(new cell(rowToCheck,i), LifeStates.DEAD);
+                hits.push(new cell(rowToCheck,i));
             }
         }
+        return hits;
 
     },
     fireHitEvent : function (row,col) {

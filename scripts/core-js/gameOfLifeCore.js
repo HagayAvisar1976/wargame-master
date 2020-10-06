@@ -147,6 +147,25 @@ var LifeCore = {
 
         return nc;
 
+    },
+
+    getNeighbors: function (row,col) {
+        var neighbours = [[-1, -1], [-1, 0], [-1, +1],
+                          [0, -1],/*     */[0, +1],
+                          [+1, -1], [+1, 0], [+1, +1]];
+
+        var neighboursCells = [];
+        for (var i = 0; i < neighbours.length; i++) {
+            var offset = neighbours[i];
+            var neighbourRowPosition = row + offset[0];
+            var neighbourColPosition = col + offset[1];
+
+            if (neighbourRowPosition >= 0 && neighbourColPosition >= 0 && neighbourRowPosition < this._rows && neighbourColPosition < this._columns) {
+                neighboursCells.push(new cell(neighbourRowPosition, neighbourColPosition));
+            }
+
+        }
+        return neighboursCells;
     }
 
 
