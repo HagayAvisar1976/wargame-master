@@ -107,6 +107,8 @@ function drawPlayerWall(row,color){
 
 function drawGridLines() {
 
+    if (document.getElementById("drawGridLines").checked === false) return;
+
     var c = document.getElementById("matrixCanvas");
     var ctx = c.getContext("2d");
     ctx.strokeStyle = "#999";

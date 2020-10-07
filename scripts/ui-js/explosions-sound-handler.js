@@ -13,6 +13,8 @@ var hitSounds = [
 
 function playHitSound() {
 
+  if (document.getElementById("useBackgroundAudio").checked === false) return;
+
   if(callinghitSoundToMuch(playHitSound.lastCallToBoom) == false){
     playExplosionSound();
     playHitSound.lastCallToBoom = Date.now();
