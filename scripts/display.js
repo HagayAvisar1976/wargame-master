@@ -5,24 +5,11 @@ var startGameTime = null;
 var cellSize =  5; // default
 var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
 var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
-//var fadeOutInterval;
+
 var playerAColor = "#11ffcc";
 var playerBColor = "#ff3333"
 var PLAYER_A = "PLAYER_A";
 var PLAYER_B = "PLAYER_B";
-/*
-var musicFiles = [
-    {file: 'pirates_of_the_caribbean.mp3'},
-    {file: 'terminator.mp3'},
-    {file: 'mission_impossible.mp3'},
-    {file: 'games_of_thrones.mp3'},
-    {file: 'battlestar_galactica.mp3'},
-    {file: 'dark_knight_rises.mp3'},
-    {file: 'fury_road.mp3'},
-    {file: 'transformers.mp3'},
-    {file: 'wonder_woman.mp3'}];
-
- */
 
 
 function onLoad() {
@@ -57,6 +44,7 @@ function fillPlayersSelecetOptions(){
         playerBSelection.add(optionB, i +1);
     }
 }
+
 function hitListerer(e) {
 
     var c = document.getElementById("matrixCanvas");
@@ -67,38 +55,9 @@ function hitListerer(e) {
 
     drawExplosionOnBoard(e.detail.row*cellSize,e.detail.col*cellSize);
     playHitSound();
-    /*
-    if(callingBoomToMuch(hitListerer.lastCallToBoom) == false){
-        playBooomSound();
-        hitListerer.lastCallToBoom = Date.now();
-    }
-
-     */
 
 }
 
-/*
-function callingBoomToMuch(lastcall) {
-    if(lastcall === undefined|| lastcall == null){
-        return false;
-    }
-    const minWaitingTime = 200;
-
-    var mili = Date.now() - lastcall;
-    return (mili < minWaitingTime );
-}
-
-function playBooomSound(){
-    var myAudio = document.createElement("audio");
-    myAudio.volume = 0.3;
-    myAudio.src ="./audio/bomb1.mp3";
-    myAudio.load();
-    myAudio.play();
-
-    setTimeout(function () {myAudio.pause();},1000);
-}
-
- */
 
 function drawCells() {
 
@@ -198,8 +157,7 @@ function endGameOperations() {
 
 }
 
-function displayGameResults()
-{
+function displayGameResults() {
     var results = GameEngine.getTheWinner();
 
     document.getElementById("drawDivSection").style.display = "none";
@@ -248,58 +206,6 @@ function startNewGame() {
     }
 }
 
-
-/*
-function handleBackgroundAudio(start){
-
-    if(document.getElementById("useBackgroundAudio").checked === false) return;
-
-    var backGroundAudio = document.getElementById("backGroundAudio");
-    if(start == true){
-        setBackgroundAudioSource();
-        backGroundAudio.volume = 1; // return volume back to normal after fadeout
-        backGroundAudio.load();
-        backGroundAudio.play();
-    }else
-    {
-        fadeOutInterval = setInterval(function() { FadeOutBackgroundAudio() }, 150);
-    }
-}
-
-function FadeOutBackgroundAudio() {
-
-    var backGroundAudio = document.getElementById("backGroundAudio");
-    var vol = backGroundAudio.volume;
-
-    if ( vol > 0.05 )
-    {
-        backGroundAudio.volume -= 0.05;
-        console.info("volume is:" + vol);
-    }
-    else
-    {
-        backGroundAudio.volume = 0;
-        backGroundAudio.pause();
-        clearInterval(fadeOutInterval);
-        console.info("volume is:" + vol);
-    }
-
-}
-
-function setBackgroundAudioSource() {
-
-    var m = (localStorage.getItem('game-of-life-music-index') || 0) % musicFiles.length;
-    if(m<0 || m> musicFiles.length)
-        alert("Invalid background music file index:"+ m );
-
-    var backGroundSource = document.getElementById("backGroundSource");
-    backGroundSource.src = "./audio/" + musicFiles[m].file;
-
-    m = (m + 1) % musicFiles.length;
-    localStorage.setItem('game-of-life-music-index', m);
-}
-
- */
 
 function stopGame(){
 
