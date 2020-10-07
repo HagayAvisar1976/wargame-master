@@ -40,3 +40,5 @@ function playExplosionSound() {
 
   setTimeout(function () {myAudio.pause();},1000);
 }
+
+

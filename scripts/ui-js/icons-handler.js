@@ -1,4 +1,4 @@
-var icon4EachBot = false;
+var icon4EachBot = true;
 var iconsFiles = [
   {file: 'bull.png',bot:'test'},
   {file: 'cobra.png',bot:'test'},

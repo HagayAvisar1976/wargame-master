@@ -65,6 +65,7 @@ function hitListerer(e) {
     ctx.lineWidth = 1;
     ctx.fillRect(e.detail.col*cellSize, e.detail.row*cellSize, cellSize, cellSize);
 
+    drawExplosionOnBoard(e.detail.row*cellSize,e.detail.col*cellSize);
     playHitSound();
     /*
     if(callingBoomToMuch(hitListerer.lastCallToBoom) == false){
@@ -146,6 +147,7 @@ function drawPlayerWall(row,color){
 }
 
 function drawGridLines() {
+
     var c = document.getElementById("matrixCanvas");
     var ctx = c.getContext("2d");
     ctx.strokeStyle = "#999";
@@ -370,10 +372,10 @@ function onNextGenClick() {
 
 /*
 
-BUGS that I need to fix:
+AFTER THE GAME :
 //////////////////////////
-- bot budget needs to move from SDK to game engine while creating new bot game object instead of the registered object.
- registered bot should only save fixed data (name, function, engineers) score and budget should be in game engine object.
+- move control of the game to game engine instead of display
+- push the data to bot and remove sdk objects
 //////////////////////////
 
 http://conwaylife.appspot.com/library
