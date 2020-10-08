@@ -33,6 +33,14 @@ function callinghitSoundToMuch(lastcall) {
 
 function playExplosionSound() {
 
+  /* to try this code*/
+  var explosionFile = Math.floor(Math.random() * hitSounds.length);
+  var src = "./audio/explosions/" + hitSounds[explosionFile].file;
+  var audio = new Audio(src);
+  audio.volume = 1;
+  audio.play();
+
+/*
   var myAudio = document.createElement("audio");
   myAudio.volume = 1;
   var explosionFile = Math.floor(Math.random() * hitSounds.length);
@@ -41,6 +49,8 @@ function playExplosionSound() {
   myAudio.play();
 
   setTimeout(function () {myAudio.pause();},1000);
+
+ */
 }
 
 
