@@ -11,6 +11,7 @@ var GameEngine = {
 
     _playerA:null,
     _playerB:null,
+    _halfBudget:false,
 
 
     newGame : function(playerNameA, playerNameB) {
@@ -113,8 +114,16 @@ var GameEngine = {
     },
 
     updatePlayersBudget : function (playerA, playerB) {
-        playerA.updateBudget(BudgetIncreasePerCycle);
-        playerB.updateBudget(BudgetIncreasePerCycle);
+        if(this._halfBudget === false){
+            playerA.updateBudget(BudgetIncreasePerCycle);
+            playerB.updateBudget(BudgetIncreasePerCycle);
+        }
+        else{
+            if((LifeCore.getGeneration() % 2) === 0){ // give budget only on even generations
+                playerA.updateBudget(BudgetIncreasePerCycle);
+                playerB.updateBudget(BudgetIncreasePerCycle);
+            }
+        }
     },
 
     check4Hits: function (playerA, playerB) {
@@ -161,6 +170,12 @@ var GameEngine = {
         }
         console.error("you are trying to get budget for a bot that is not playing right now {" + botname + "}");
         return null;
+    },
+
+    setHalfBudgetFlag : function (value) {
+        if (typeof value === "boolean") {
+            this._halfBudget = value;
+        }
     }
 
 }

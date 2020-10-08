@@ -277,6 +277,11 @@ function onNextGenClick() {
     GameEngine.playRound();
 }
 
+function useHalfBudegtOnChange(element) {
+    // we use this option only when we have tie games.
+    GameEngine.setHalfBudgetFlag(element.checked);
+}
+
 
 /*
 
