@@ -10,7 +10,7 @@ var iconsFiles = [
   {file: 'knight.png',bot:'test'},
   {file: 'lion.png',bot:'test'},
   {file: 'pirate.png',bot:'AttackerBot'},
-  {file: 'robot.png',bot:'test'},
+  {file: 'robot.png',bot:'sonicBot'},
   {file: 'scorpion.png',bot:'test'},
   {file: 'shark.png',bot:'test'},
   {file: 'tiger.png',bot:'test'},

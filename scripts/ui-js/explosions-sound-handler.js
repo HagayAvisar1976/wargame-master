@@ -37,7 +37,7 @@ function playExplosionSound() {
   var explosionFile = Math.floor(Math.random() * hitSounds.length);
   var src = "./audio/explosions/" + hitSounds[explosionFile].file;
   var audio = new Audio(src);
-  audio.volume = 1;
+  audio.volume = 0.5;
   audio.play();
 
 /*

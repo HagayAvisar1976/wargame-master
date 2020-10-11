@@ -14,7 +14,8 @@ var PLAYER_B = "PLAYER_B";
 
 function onLoad() {
 
-    localStorage.clear();
+    //localStorage.clear(); // to save music file postion even after refresh the page.
+
     var c = document.getElementById("matrixCanvas");
     c.width = canvasWidth;
     c.height = canvasHight;
