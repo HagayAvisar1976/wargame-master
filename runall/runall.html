@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Run All vs ALL</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+  <link href="https://unpkg.com/tabulator-tables@4.8.2/dist/css/tabulator.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.2/dist/js/tabulator.min.js"></script>
+
+
+  <script src="../scripts/core-js/gameOfLifeCore.js"></script>
+  <script src="../scripts/core-js/gameEngineSDK.js"></script>
+  <script src="../scripts/core-js/gameSDK.js"></script>
+  <script src="../scripts/core-js/gameEngine.js"></script>
+
+  <!-- BOTs JS files -->
+  <script src="../scripts/bots-js/botsUtils.js"></script>
+  <script src="../scripts/bots-js/botExample.js"></script>
+  <script src="../scripts/bots-js/sonicBot.js"></script>
+
+  <script src="runall.js"></script>
+
+</head>
+<body onload="onLoad();">
+
+<div>
+
+  <div>
+    <label>current game is:</label>
+    Player A: <label id="PlayerA"></label> Vs. Player B: <label id="PlayerB"></label>
+    <br>
+    Score A:<label id="scoreA"></label> Score B: <label id="scoreB"></label>
+    <br>
+    Game Time: <label id="gameTimeDisplay"></label>
+    <br>
+    Generation:<label id="generation"></label>
+  </div>
+
+  <br>
+  <br>
+
+
+  <button id="downloadData" onclick="downloadData();">download data</button>
+  <div id="example-table" style="width: 70%;"></div>
+
+
+  <button id="runall" onclick="runAll();" >Run All vs All</button>
+  <button id="testbtn" onclick="updateNextGameRivels();" >test</button>
+
+
+
+
+</div>
+</body>
+</html>
