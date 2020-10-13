@@ -1,7 +1,7 @@
 (function PutinBot(){
 
   var botName = "Putin";
-  var engineers =["Sharon, Jonathan","Soleman, Tsuria","Empty"];
+  var engineers =["Sharon Jonathan","Soleman Tsuria"];
   var cols = GameSDK.getMatrixDimensions().cols
   var mineLocator = cols*0.95
 

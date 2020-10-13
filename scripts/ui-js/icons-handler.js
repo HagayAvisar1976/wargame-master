@@ -13,8 +13,8 @@ var iconsFiles = [
   {file: 'robot.png',bot:'sonicBot'},
   {file: 'scorpion.png',bot:'test'},
   {file: 'shark.png',bot:'test'},
-  {file: 'tiger.png',bot:'test'},
-  {file: 'viking.png',bot:'test'},
+  {file: 'tiger.png',bot:'Putin'},
+  {file: 'viking.png',bot:'AuntyPython'},
   {file: 'wizard.png',bot:'test'}];
 
 
