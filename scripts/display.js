@@ -135,7 +135,6 @@ function displayGameInfo(){
     drawCells();
 
     document.getElementById('lblGeneration').innerHTML = "G: " + LifeCore.getGeneration();
-
     document.getElementById("lblPlayer_A_Score").innerText = GameEngine.getPlayerScore(Players.PLAYER_A);
     document.getElementById("lblPlayer_B_Score").innerText = GameEngine.getPlayerScore(Players.PLAYER_B);
 
@@ -147,9 +146,11 @@ function playRound(){
 
     GameEngine.playRound();
 
+    updateGameTimeDisplay();
     if(isTimeOver()){
         endGameOperations();
     }
+
 
 }
 
@@ -157,6 +158,7 @@ function endGameOperations() {
     stopGame();
     displayGameResults();
     stopBackgroundMusic();
+    updateGameTimeDisplay();
 
 }
 
@@ -196,8 +198,8 @@ function startNewGame() {
 
         gameIntervalID = setInterval(playRound, gameInterval);
         startGameTime = Date.now();
-        $(".stopWatch").TimeCircles({timer:GAME_TIMEOUT, start:false, time: { Days: { show: false }, Hours: { show: false }, Minutes:{show:false}}});
-        $(".stopWatch").TimeCircles().start();
+        //$(".stopWatch").TimeCircles({timer:GAME_TIMEOUT, start:false, time: { Days: { show: false }, Hours: { show: false }, Minutes:{show:false}}});
+        //$(".stopWatch").TimeCircles().start();
 
         startBackgroundMusic();
 
@@ -215,7 +217,7 @@ function stopGame(){
     if(gameIntervalID!=null && gameIntervalID!=undefined){
         clearInterval(gameIntervalID);
         gameIntervalID = null;
-        $(".stopWatch").TimeCircles().stop();
+        //$(".stopWatch").TimeCircles().stop();
         //stopBackgroundMusic(); // need to fix bug when pressing stop button to stop the music as well... this is not the way :-)
     }
 
@@ -223,13 +225,33 @@ function stopGame(){
 
 function isTimeOver(){
 
+    var seconds = getGameTime();//Math.floor(millis/1000);
+
+    return (seconds >= GAME_TIMEOUT);
+}
+
+function getGameTime() {
     var millis = Date.now() - startGameTime;
     var seconds = Math.floor(millis/1000);
 
-    return (seconds >= GAME_TIMEOUT);
-
+    return seconds;
 }
 
+function updateGameTimeDisplay() {
+
+    var remainingSeconds = GAME_TIMEOUT - getGameTime();
+    document.getElementById("gameTimeDisplay").className = "timeDisplay";
+    if(remainingSeconds <=10){
+        document.getElementById("gameTimeDisplay").className = "timeDisplay-blinking";
+    }
+
+    if(remainingSeconds <= 0){
+        document.getElementById("gameTimeDisplay").className = "timeDisplay-end";
+    }
+
+    document.getElementById("gameTimeDisplay").innerText = remainingSeconds + " - Seconds";
+
+}
 
 function onPlayerSelectionChange(element,lblToUpdate){
 

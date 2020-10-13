@@ -6,7 +6,7 @@
     <title>BOTS WAR - GAME OF LIFE</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/TimeCircles.css" />
+    <!--link rel="stylesheet" href="css/TimeCircles.css" /-->
     <link rel="stylesheet" href="css/game-of-life.css"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -23,13 +23,15 @@
     <script src="scripts/ui-js/explosions-ui-handler.js"></script>
     <script src="scripts/ui-js/background-music-handler.js"></script>
     <script src="scripts/display.js"></script>
-    <script src="scripts/TimeCircles.js"></script>
+    <!--script src="scripts/TimeCircles.js"></script -->
 
 
     <!-- BOTs JS files -->
     <script src="scripts/bots-js/botsUtils.js"></script>
     <script src="scripts/bots-js/botExample.js"></script>
     <script src="scripts/bots-js/sonicBot.js"></script>
+    <script src="scripts/bots-js/Putin.js"></script>
+    <script src="scripts/bots-js/AuntyPython.js"></script>
 
 
 
@@ -104,6 +106,7 @@
                 <div>
                     <button type="button" class="btn btn-primary" onclick="startNewGame();">Fight!</button>
                     <button type="button" class="btn btn-primary" onclick="stopGame();">Stop</button>
+                    <label id="gameTimeDisplay" class="timeDisplay" ></label>
                     <br><br><label id="lblGeneration" style="color: white;"></label>
                 </div>
 
@@ -137,10 +140,10 @@
 
 
                 <!-- clock area -->
-                <div class="stopWatch"  data-timer="90"  style="color: white; width: 50%; height: 80%;" ></div>
+               <!-- <div class="stopWatch"  data-timer="90"  style="color: white; width: 50%; height: 80%;" ></div>
                 <script>
                     $(".stopWatch").TimeCircles({start:false, time: { Days: { show: false }, Hours: { show: false }, Minutes:{show:false}}});
-                </script>
+                </script>-->
 
             </div>
 

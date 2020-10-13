@@ -12,6 +12,7 @@ function setCellsAccordingToPosition (cellsPosition,rowStart,colStart) {
     var offset = cellsPosition[i];
     var row = rowStart + offset[0];
     var col = colStart + offset[1];
+    //console.info("row:" +row + "col:"+col);
     cellsToUpdate.push(new cell(row, col));
   }
 
