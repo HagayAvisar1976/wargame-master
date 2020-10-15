@@ -1,7 +1,7 @@
 var icon4EachBot = true;
 var iconsFiles = [
   {file: 'bull.png',bot:'Talus'},
-  {file: 'cobra.png',bot:'test'},
+  {file: 'cobra.png',bot:'BiGbAnG'},
   {file: 'dragon.png',bot:'LifeGamer'},
   {file: 'eagle.png',bot:'EmptyBot'},
   {file: 'gladiator.png',bot:'Cagestar'},
