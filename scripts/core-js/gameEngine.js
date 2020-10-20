@@ -97,6 +97,7 @@ var GameEngine = {
     playerMove : function(player,isMirror){
         var cellsToUpdate =  player.playMove();
         cellsToUpdate = this.playerCellsValidation(cellsToUpdate);
+        cellsToUpdate = this.corruptedCellsValidation(cellsToUpdate);
         if((cellsToUpdate!= null && cellsToUpdate.length>0) && cellsToUpdate.length < player.getBudget()) {
             if(isMirror) {
                 this.mirrorCellsForFighter(cellsToUpdate);
@@ -111,6 +112,10 @@ var GameEngine = {
         // each player can set a cell only in his half of the board.
         return cells.filter(function (value,index,arr) { return !(arr[index].row >= LifeCore.getRowsNumber() / 2) });
 
+    },
+    corruptedCellsValidation : function(cells){
+        // remove corrupted cells that are not reflected row/col valid numbers.
+        return cells.filter(function (value,index,arr) { return (!isNaN(arr[index].row) && !isNaN(arr[index].col)) });
     },
 
     updatePlayersBudget : function (playerA, playerB) {

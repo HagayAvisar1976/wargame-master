@@ -132,9 +132,12 @@ function drawGridLines() {
 
 function displayGameInfo(){
 
-    drawCells();
-
-    document.getElementById('lblGeneration').innerHTML = "G: " + LifeCore.getGeneration();
+    var refreshRate =  document.getElementById("screenRefreshRate").value;
+    var generation = LifeCore.getGeneration();
+    if((generation % refreshRate) ===0 ){
+        drawCells();
+    }
+    document.getElementById('lblGeneration').innerHTML = "G: " + generation;//LifeCore.getGeneration();
     document.getElementById("lblPlayer_A_Score").innerText = GameEngine.getPlayerScore(Players.PLAYER_A);
     document.getElementById("lblPlayer_B_Score").innerText = GameEngine.getPlayerScore(Players.PLAYER_B);
 
@@ -198,6 +201,8 @@ function startNewGame() {
 
         gameIntervalID = setInterval(playRound, gameInterval);
         startGameTime = Date.now();
+
+
         //$(".stopWatch").TimeCircles({timer:GAME_TIMEOUT, start:false, time: { Days: { show: false }, Hours: { show: false }, Minutes:{show:false}}});
         //$(".stopWatch").TimeCircles().start();
 
@@ -312,6 +317,9 @@ AFTER THE GAME :
 //////////////////////////
 - move control of the game to game engine instead of display
 - push the data to bot and remove sdk objects
+- color each cell according to payer
+- create small star when cell is created
+- create demo mode for bot (so we can see bot strategy)
 //////////////////////////
 
 http://conwaylife.appspot.com/library
