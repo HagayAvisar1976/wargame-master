@@ -138,9 +138,19 @@ function displayGameInfo(){
         drawCells();
     }
     document.getElementById('lblGeneration').innerHTML = "G: " + generation;//LifeCore.getGeneration();
-    document.getElementById("lblPlayer_A_Score").innerText = GameEngine.getPlayerScore(Players.PLAYER_A);
-    document.getElementById("lblPlayer_B_Score").innerText = GameEngine.getPlayerScore(Players.PLAYER_B);
 
+    updateScoreDisplay();
+}
+
+function updateScoreDisplay() {
+
+    var playerAScore = GameEngine.getPlayerScore(Players.PLAYER_A);
+    var playBScore = GameEngine.getPlayerScore(Players.PLAYER_B);
+
+    document.getElementById("lblPlayer_A_Score").innerText = playerAScore;
+    document.getElementById("lblPlayer_B_Score").innerText = playBScore;
+    document.getElementById("playerAscore").innerText = playerAScore;
+    document.getElementById("playerBscore").innerText = playBScore;
 }
 
 function playRound(){
