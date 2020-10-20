@@ -10,7 +10,6 @@
   var leftGun = true;
 
   function BiGbAnGBotLogic() {
-    console.info("BiGbAnGBotLogic");
     let budget = GameSDK.getMyBudget(botName);
     if (budget > 36 && gliderGunCounter < (cols / 35)) {
       return createGosperGliderGunRight(rows - 37, 35 * gliderGunCounter++);
