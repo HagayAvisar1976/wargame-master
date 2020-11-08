@@ -30,8 +30,8 @@ function runAll() {
 }
 
 function initPlayersIndexes() {
-  localStorage.setItem("playerAIndex",0);
-  localStorage.setItem("playerBIndex",1);
+  localStorage.setItem("playerAIndex",7);
+  localStorage.setItem("playerBIndex",0);
 }
 
 
@@ -154,7 +154,10 @@ function updateNextGameRivels() {
       //console.info("A:" + playerAIndex + " B:" + playerBIndex);
       return; // exit this method.
     }
+    downloadData();
+    //document.getElementById("downloadData").click(); // it means that we have a player that play aginest all other, we donwnload the data.
     playerBIndex = 0;
+    alert("Stop and update next player");
   }
 
   // if I reach this line it means that I am starting a new round again
@@ -165,7 +168,12 @@ function updateNextGameRivels() {
 }
 
 function downloadData() {
-  var date_time_suffix =  Date.now().toString();
+  var date = new Date();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var date_time_suffix = date.getDate() + "_" +(date.getMonth() +1) +"_"+ hours + date.getFullYear() +"_" + hours + "_" + minutes;
+
+  //var date_time_suffix =  Date.now().toString();
   var filename = "botswar-runall" + date_time_suffix +".csv";
   resultsTable.download("csv", filename);
 }

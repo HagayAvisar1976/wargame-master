@@ -330,6 +330,9 @@ AFTER THE GAME :
 - color each cell according to payer
 - create small star when cell is created
 - create demo mode for bot (so we can see bot strategy)
+- create a mode of playing X games in a row to cancel the random affect.
+- display pictures of winners and losers.
+- splash screen befpre starting a game displaying the players.
 //////////////////////////
 
 http://conwaylife.appspot.com/library
