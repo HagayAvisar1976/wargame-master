@@ -25,9 +25,13 @@
   var rightGliders = {}
   var block_count = 0
 
-  function LifeGamerLogic() {
-    var budget = GameSDK.getMyBudget(botName);
-    var generation = GameSDK.getCurrentGeneration();
+  function LifeGamerLogic(data) {
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
+
+
+
     if (block_count < (240 / 3) && budget > 3) {
       var cellsPosition = [[0, 0], [0, 1], [-1, 0], [-1, 1]];
       block_count++;

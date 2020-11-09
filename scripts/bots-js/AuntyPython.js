@@ -46,29 +46,32 @@
         return pixels;
     };
 
-  function AuntyPythonlogic(){
+  function AuntyPythonlogic(data){
 
-  	var budget = GameSDK.getMyBudget(botName);
-    var changeParam=GameSDK.getCurrentGeneration() %  GameSDK.getMatrixDimensions().cols;
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
+
+    var changeParam=generation %  dimensions.cols;
     var plan;
-        if (GameSDK.getCurrentGeneration() === 1) {
+        if (generation === 1) {
             planIndex = 0;
         }
-        if (GameSDK.getCurrentGeneration() < GameSDK.getMatrixDimensions().cols*3){
+        if (generation < dimensions.cols*3){
           plan=['spaceship','fence','block'];
           // plan=['glider']
         }
-        else if (GameSDK.getCurrentGeneration() < 2000) {
+        else if (generation < 2000) {
             plan = ['spaceship','glider','block','spaceship'];
 
-        } else if (GameSDK.getCurrentGeneration() < 4000) {
+        } else if (generation < 4000) {
             plan = ['spaceship','bomb','block'];
 
-        } else if (GameSDK.getCurrentGeneration() < 6000){
+        } else if (generation < 6000){
             plan = ['spaceship','glider','block'];
 
         }
-        else if (GameSDK.getCurrentGeneration() < 8000){
+        else if (generation < 8000){
           plan = ['spaceship'];
         }
         else {
@@ -76,7 +79,7 @@
         }
 
       
-      if ((changeParam % GameSDK.getMatrixDimensions().cols) == 0){
+      if ((changeParam % dimensions.cols) == 0){
           if (planIndex > plan.length){
           planIndex = planIndex % plan.length;
           }
@@ -85,27 +88,27 @@
 
 
         if (plan[planIndex] === 'block') {
-          if (budget >=3 && (GameSDK.getCurrentGeneration() % 4) == 0){
-           blockCol=GameSDK.getCurrentGeneration() %  (GameSDK.getMatrixDimensions().cols-2);
+          if (budget >=3 && (generation % 4) == 0){
+           blockCol=generation %  (dimensions.cols-2);
            blockRow=50
             return createBlock(blockRow, blockCol);
           }
         } else if (plan[planIndex] === 'fence') {
-          if (budget>=9 && (GameSDK.getCurrentGeneration()%9 )==0){
+          if (budget>=9 && (generation%9 )==0){
               fpRow=60
-              fpCol= GameSDK.getCurrentGeneration() %  (GameSDK.getMatrixDimensions().cols-2);
-            return createFidgetSpinner(fpRow,fpCol)
+              fpCol= generation %  (dimensions.cols-2);
+            return createFidgetSpinner(fpRow,fpCol,dimensions)
           }
         } else if (plan[planIndex] === 'glider') {
-          if (budget>=5 && (GameSDK.getCurrentGeneration()%5 )==0){
+          if (budget>=5 && (generation%5 )==0){
           gliderType=getRnd(0,1)
           // gliderType=0
           if (gliderType){
-            gCol =getRnd(Math.floor(GameSDK.getMatrixDimensions().cols/2 - 2), GameSDK.getMatrixDimensions().cols-10);
+            gCol =getRnd(Math.floor(dimensions.cols/2 - 2), dimensions.cols-10);
           }
           else{
             
-            gCol = getRnd(10, Math.floor(GameSDK.getMatrixDimensions().cols/2 - 2));
+            gCol = getRnd(10, Math.floor(dimensions.cols/2 - 2));
           }
 
           gRow = 76;  //Decide where
@@ -113,17 +116,17 @@
             return genGlider(gliderType, gRow, gCol);
           }
         } else if (plan[planIndex] === 'spaceship') {
-          if (budget >= 8 && (GameSDK.getCurrentGeneration()%8 )==0){
-            // console.log(GameSDK.getMatrixDimensions())
-          sCol = getRnd(0, GameSDK.getMatrixDimensions().cols - 2);
+          if (budget >= 8 && (generation%8 )==0){
+
+          sCol = getRnd(0, dimensions.cols - 2);
           sRow = getRnd(70, 75);  //Decide where
 
             return genSpaceship(sRow,sCol)
         }
       }
       else if (plan[planIndex] === 'bomb') {
-        if (budget >=4 && (GameSDK.getCurrentGeneration() % 6) == 0){
-            bombCol = GameSDK.getCurrentGeneration() %  (GameSDK.getMatrixDimensions().cols-2);
+        if (budget >=4 && (generation % 6) == 0){
+            bombCol = generation %  (dimensions.cols-2);
             bombRow = 75
           return createBomb(bombRow,bombCol)
         }
@@ -131,12 +134,12 @@
       return null;
     };
     
-  function createFidgetSpinner(rowStart,colStart){
+  function createFidgetSpinner(rowStart,colStart,dimensions){
 
     var cellsPosition = [[0,0],[0,-1],[0,-2],
       [-3,-5],[-2,-5],[-1,-5],[1,-5],[2,-5],[3,-5]];
-    
-    if (colStart > GameSDK.getMatrixDimensions().cols - 2) {
+
+    if (colStart > dimensions.cols - 2) {
             colStart = 0;
             rowStart += 10;
         }

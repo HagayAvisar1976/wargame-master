@@ -207,8 +207,10 @@ function playerBot (botExe) {
     },
 
     this.playMove = function () {
+        var matrix = {"rows":Math.round(LifeCore.getRowsNumber()/2),"cols":LifeCore.getColmunsNumber()};
+        var data = {"budget":this.getBudget(),"generation":LifeCore.getGeneration(),"matrix":matrix};
 
-        var cellsToUpdate = this._botExe._logicFunction();
+        var cellsToUpdate = this._botExe._logicFunction(data);
         if (cellsToUpdate == null || cellsToUpdate == undefined)
         {
             cellsToUpdate = [];

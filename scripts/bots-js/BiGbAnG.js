@@ -3,18 +3,22 @@
 
   var botName = "BiGbAnG";
   var engineers = ["Abin", "Max", "Tony"];
-  const rows = GameSDK.getMatrixDimensions().rows;
-  const cols = GameSDK.getMatrixDimensions().cols;
+
   var gliderGunCounter = 0;
   var gliderCol = 0;
   var leftGun = true;
 
-  function BiGbAnGBotLogic() {
-    let budget = GameSDK.getMyBudget(botName);
+  function BiGbAnGBotLogic(data) {
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
+    var rows = dimensions.rows;
+    var cols = dimensions.cols;
+
     if (budget > 36 && gliderGunCounter < (cols / 35)) {
       return createGosperGliderGunRight(rows - 37, 35 * gliderGunCounter++);
     }
-    if (budget > 6 && GameSDK.getCurrentGeneration() > 600 && leftGun == true) {
+    if (budget > 6 && generation > 600 && leftGun == true) {
       let temp = gliderCol;
       if (6 * gliderCol >= (cols / 1.3)) {
         gliderCol = -1;
@@ -22,7 +26,7 @@
       }
       gliderCol++;
       return createGliderLeft(rows - 3, (6 * temp) + 1);
-    } else if (budget > 6 && GameSDK.getCurrentGeneration() > 600 && leftGun
+    } else if (budget > 6 && generation > 600 && leftGun
         != true) {
       let temp = gliderCol;
       if ((Math.floor(cols * 0.26) + (6 * gliderCol)) >= (cols - 2)) {

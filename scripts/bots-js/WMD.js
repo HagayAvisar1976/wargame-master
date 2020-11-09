@@ -4,14 +4,22 @@
   var engineers = ["Tom", "Alpha", "Raji"];
   var col = 11;
   var col_space2 = 26;
-  var dimensions = GameSDK.getMatrixDimensions();
   var gen = 0;
   var defenderBotName_row = 50;
-  var colStart = (dimensions.cols + 5);
-  var colStart1 = (dimensions.cols + 5);
+  var colStart = 0;//(dimensions.cols + 5);
+  var colStart1 = 0;// (dimensions.cols + 5);
 
-  function WMDBotLogic() {
-    var budget = GameSDK.getMyBudget(botName);
+  function WMDBotLogic(data) {
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
+
+    if(generation == 1){
+       colStart = (dimensions.cols + 5);
+       colStart1 = (dimensions.cols + 5);
+    }
+
+
     if (col_space2 < dimensions.cols && colStart1 <= 0) {
       gen += 1;
       if (((gen) % 8) === 1 && col <= 180) {

@@ -325,14 +325,15 @@ function useHalfBudegtOnChange(element) {
 
 AFTER THE GAME :
 //////////////////////////
-- move control of the game to game engine instead of display
 - push the data to bot and remove sdk objects
-- color each cell according to payer
-- create small star when cell is created
-- create demo mode for bot (so we can see bot strategy)
+- move control of the game to game engine instead of display
 - create a mode of playing X games in a row to cancel the random affect.
+- create demo mode for bot (so we can see bot strategy)
+- color each cell according to payer
+
+- create small star when cell is created
 - display pictures of winners and losers.
-- splash screen befpre starting a game displaying the players.
+- splash screen before starting a game displaying the players.
 //////////////////////////
 
 http://conwaylife.appspot.com/library

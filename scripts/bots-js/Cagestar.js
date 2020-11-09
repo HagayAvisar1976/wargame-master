@@ -6,20 +6,22 @@
   var defend_row = 55;
   var vv = 1;
 
-  function Cagebotlogic() {
-    var budget = GameSDK.getMyBudget(botName);
-    if ((GameSDK.getCurrentGeneration() % 9) === 0
-        & (GameSDK.getCurrentGeneration() / 9) <= 24) {
-      var dimensions = GameSDK.getMatrixDimensions();
-      var colStart = (GameSDK.getCurrentGeneration() / 9 - 1) * 9 + 7;
+  function Cagebotlogic(data) {
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
+
+
+    if ((generation % 9) === 0
+        & (generation / 9) <= 24) {
+      var colStart = (generation / 9 - 1) * 9 + 7;
       return createGlider_1(
-          dimensions.rows - 6 - ((GameSDK.getCurrentGeneration() / 9) % 2) * 6,
+          dimensions.rows - 6 - ((generation / 9) % 2) * 6,
           colStart);
     }
-    if ((GameSDK.getCurrentGeneration() / 9) > 24
-        && (GameSDK.getCurrentGeneration() % 13) === 0) {
-      var dimensions = GameSDK.getMatrixDimensions();
-      var colStart = (GameSDK.getCurrentGeneration() - 216) % dimensions.cols;
+    if ((generation / 9) > 24
+        && (generation % 13) === 0) {
+      var colStart = (generation - 216) % dimensions.cols;
       if (colStart <= 13) {
         defend_row -= 6;
         if (defend_row <= 15) {

@@ -2,8 +2,7 @@
 
   var botName = "Putin";
   var engineers =["Sharon Jonathan","Soleman Tsuria"];
-  var cols = GameSDK.getMatrixDimensions().cols
-  var mineLocator = cols*0.95
+
 
     function mineColMaker(mineLocator){
 
@@ -50,12 +49,14 @@
 
       }
 
-    function PutinLogic(){
-        var budget = GameSDK.getMyBudget(botName);
-        var generation = GameSDK.getCurrentGeneration();
-        var dimensions = GameSDK.getMatrixDimensions()
-        var rows = dimensions.rows
-        var cols = dimensions.cols
+    function PutinLogic(data){
+      var budget = data.budget;
+      var generation = data.generation;
+      var dimensions = data.matrix;
+
+      var rows = dimensions.rows
+      var cols = dimensions.cols
+      var mineLocator = cols*0.95
 
         if (0<generation && generation<=10 && budget%3==0 && generation%4==0)
         {return createMine(rows-15, generation%cols)

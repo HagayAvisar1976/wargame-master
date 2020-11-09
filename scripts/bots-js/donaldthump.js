@@ -12,18 +12,22 @@
   var DEFENDER_CELLS = 6;
   var defenderBotName_row = DEFENDER_FONT_LINE;
 
-  function botLogic() {
+  function botLogic(data) {
     if (attack === true) {
-      return attackerBotLogic();
+      return attackerBotLogic(data);
     } else {
-      return defenderLogic();
+      return defenderLogic(data);
     }
   }
 
-  function attackerBotLogic() {
-    var budget = GameSDK.getMyBudget(botName);
-    if ((GameSDK.getCurrentGeneration() % ATTACKER_CELLS) === 0) {
-      var dimensions = GameSDK.getMatrixDimensions();
+  function attackerBotLogic(data) {
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
+
+
+
+    if ((generation % ATTACKER_CELLS) === 0) {
       cnt = (cnt + 1) % NUM_OF_SPACESHIP_PER_LINE;
       if (cnt === NUM_OF_SPACESHIP_PER_LINE - 1) {
         attack = false;
@@ -46,9 +50,13 @@
     return setCellsAccordingToPosition(cellsPosition, rowStart, colStart);
   }
 
-  function defenderLogic() {
-    var budget = GameSDK.getMyBudget(botName);
-    if (budget >= DEFENDER_CELLS && (GameSDK.getCurrentGeneration()
+  function defenderLogic(data) {
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
+
+
+    if (budget >= DEFENDER_CELLS && (generation
         % DEFENDER_CELLS) == 0) {
       if (colCnt + 4 > NUM_OF_DEFENDER_BLOCK_PER_LINE) {
         attack = true;

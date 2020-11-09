@@ -16,27 +16,39 @@
         return dim_interval;
     }
 
-    var dimensions = GameSDK.getMatrixDimensions()
-    var rows = dimensions.rows
-    var cols = dimensions.cols
+
+
     var setting_lines = [0.4,0.25,0.2,0.15]
     var generations_int = [0,400,500,800]
     var spaceShipLauncher = 0
     var yes_no = 0
     var last_loop = 3
     var looped = 7
-    bound_0 = Math.ceil(rows * setting_lines[0])
-    bound_1 = Math.ceil(rows * setting_lines[1])
-    bound_2 = Math.ceil(rows * setting_lines[2])
-    bound_3 = Math.ceil(rows * setting_lines[3])
+    bound_0 = Math.ceil(80 * setting_lines[0])
+    bound_1 = Math.ceil(80 * setting_lines[1])
+    bound_2 = Math.ceil(80 * setting_lines[2])
+    bound_3 = Math.ceil(80 * setting_lines[3])
     safe_area = [0, bound_0-1]
     land_mines_area = [bound_0+2, bound_0+bound_1-2]
     no_mens_land_area = [bound_0+bound_1, bound_0+bound_1+bound_2-1]
-    danger_zone = [bound_0+bound_1+bound_2, rows-1]
+    danger_zone = [bound_0+bound_1+bound_2, 80-1]
 
-    function sonicBotlogic(){
-        var budget = GameSDK.getMyBudget(botName);
-        var generation = GameSDK.getCurrentGeneration();
+    function sonicBotlogic(data){
+        var budget = data.budget;
+        var generation = data.generation;
+        var dimensions = data.matrix;
+        var rows = dimensions.rows
+        var cols = dimensions.cols
+
+        if(generation ==1){
+            bound_0 = Math.ceil(rows * setting_lines[0])
+            bound_1 = Math.ceil(rows * setting_lines[1])
+            bound_2 = Math.ceil(rows * setting_lines[2])
+            bound_3 = Math.ceil(rows * setting_lines[3])
+            danger_zone = [bound_0+bound_1+bound_2, rows-1]
+        }
+
+
         if (generation<2000 && budget%9==0){
         spaceShipLauncher =spaceShipLauncher+1
             if (spaceShipLauncher%looped==5){
@@ -52,7 +64,7 @@
             else if (spaceShipLauncher%looped==0){
                 return createSpaceShip(rows-5, cols*.85)}
             else {
-                return createMine(Math.ceil(rows/4), GameSDK.getCurrentGeneration() % dimensions.cols)}
+                return createMine(Math.ceil(rows/4), generation % dimensions.cols)}
             }
         else if (generation<3000 && budget%9==0) {
              spaceShipLauncher =spaceShipLauncher+1

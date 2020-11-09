@@ -9,11 +9,12 @@
   var AC2 = 11;
   var AL2 = 7;
 
-  function doLogic() {
+  function doLogic(data) {
 
-    var budget = GameSDK.getMyBudget(botName);
-    var generation = GameSDK.getCurrentGeneration()
-    var dimensions = GameSDK.getMatrixDimensions();
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
+
 
     var AN = Math.round(dimensions.cols / ALW);
     if (AN % 2 == 1) {

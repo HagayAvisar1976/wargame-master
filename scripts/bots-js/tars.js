@@ -4,10 +4,11 @@
   var engineers = ["Rainer Luiz", "Felipe Silva", "Herycklys"];
   var shipOffset = true;
 
-  function attackerBotLogic() {
+  function attackerBotLogic(data) {
 
-    var generation = GameSDK.getCurrentGeneration();
-    var dimensions = GameSDK.getMatrixDimensions();
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
     var edgeX = dimensions.rows;
 
     if (generation > 7 && generation <= 70) {

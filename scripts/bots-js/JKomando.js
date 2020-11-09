@@ -5,33 +5,35 @@
 
   var patterns = [];
 
-  function initPatterns(patterns) {
+  function initPatterns(patterns,dimensions) {
     let puffer2Pattern = rleToPattern(parse_rle(`b3o11b3o$o2bo10bo2bo$3bo4b3o6bo$3bo4bo2bo5bo$2bo4bo8bo!`), 90);
     puffer2Pattern.rules.push(createConsecutiveRule(puffer2Pattern, 35, [125,73], 30, 34, 20000));
     patterns.push(puffer2Pattern)
 
     let preBlockPattern = rleToPattern(parse_rle(`ob$2o!!`), 0);
-    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [225,27], -7, 18, 540));
-    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [9,15], 7, 360, 860));
-    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [15,9], 7, 1080, 1600));
-    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [221,21], -7, 1620, 2120));
-    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [21,39], 7, 2120, 2620));
-    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [217,33], -7, 2700, 3200));
-    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [210,63], -7, 3000, 3400));
-    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [30,68], -7, 3200, 3600));
-    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [30,3], 7, 3300, 3700));
+    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [225,27], -7,dimensions, 18, 540));
+    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [9,15], 7,dimensions, 360, 860));
+    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [15,9], 7,dimensions, 1080, 1600));
+    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [221,21], -7,dimensions, 1620, 2120));
+    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [21,39], 7, dimensions,2120, 2620));
+    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [217,33], -7, dimensions,2700, 3200));
+    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [210,63], -7,dimensions, 3000, 3400));
+    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [30,68], -7,dimensions, 3200, 3600));
+    preBlockPattern.rules.push(createConsecutiveRule(preBlockPattern, 16, [30,3], 7, dimensions,3300, 3700));
     patterns.push(preBlockPattern)
 
   }
 
-  function jKomandoBotLogic() {
+  function jKomandoBotLogic(data) {
+    var budget = data.budget;
+    var generation = data.generation;
+    var dimensions = data.matrix;
 
-    if (GameSDK.getCurrentGeneration() === 1){
+    if (generation === 1){
       patterns = []
-      initPatterns(patterns);
+      initPatterns(patterns,dimensions);
     }
 
-    var budget = GameSDK.getMyBudget(botName);
 
     for (let patternPosition = 0; patternPosition < patterns.length;
         patternPosition++) {
@@ -41,7 +43,7 @@
       for (let rulePosition = 0; rulePosition < currentPattern.rules.length;
           rulePosition++) {
         let currentRule = currentPattern.rules[rulePosition];
-        if (currentRule.shouldApply(GameSDK.getCurrentGeneration(), budget)) {
+        if (currentRule.shouldApply(generation, budget)) {
           let currentPosition = currentRule.getNextPosition();
           let colStart = currentPosition[0];
           let rowStart = currentPosition[1];
@@ -150,7 +152,7 @@
     return rule;
   }
 
-  function createConsecutiveRule(pattern, increaseGeneration,initialCoordinates, increaseXCoordinate,
+  function createConsecutiveRule(pattern, increaseGeneration,initialCoordinates, increaseXCoordinate,dimensions,
       startGeneration = 10, endGeneration= 1000000){
     let rule = {};
     rule.nextPosition = initialCoordinates;
@@ -166,11 +168,11 @@
       let position = rule.nextPosition;
 
       function calculateNextPosition(position, increaseXCoordinate,
-          initialCoordinates) {
+          initialCoordinates,dimensions) {
         let nextPosition = [];
         let X_COORDINATE = 0;
         let Y_COORDINATE = 1;
-        let dimensions = GameSDK.getMatrixDimensions();
+
 
         if ((position[X_COORDINATE] + increaseXCoordinate >= dimensions.cols) ||
             (position[X_COORDINATE] + increaseXCoordinate <= 0)) {
@@ -186,7 +188,7 @@
         return nextPosition;
       }
 
-      rule.nextPosition = calculateNextPosition(position, rule.increaseXCoordinate, initialCoordinates);
+      rule.nextPosition = calculateNextPosition(position, rule.increaseXCoordinate, initialCoordinates,dimensions);
       rule.nextGeneration = rule.nextGeneration + increaseGeneration;
 
       return position;

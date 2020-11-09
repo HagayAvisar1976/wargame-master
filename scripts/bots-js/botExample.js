@@ -4,15 +4,15 @@
   var botName = "AttackerBot";
   var engineers =["Hagay","Avisar","Attacker"];
 
-  function attackerBotLogic(){
+  function attackerBotLogic(data){
 
-    var budget = GameSDK.getMyBudget(botName);
+    var budget = data.budget;//GameSDK.getMyBudget(botName);
+    var generation = data.generation;
 
-    if((GameSDK.getCurrentGeneration() % 20) === 0){
-      var dimensions = GameSDK.getMatrixDimensions();
-      var colStart = GameSDK.getCurrentGeneration() % dimensions.cols;
+    if((generation % 20) === 0){
+      var dimensions = data.matrix;//GameSDK.getMatrixDimensions();
+      var colStart = generation % dimensions.cols;
       return createGlider(dimensions.rows - 20,colStart);
-      //return createSpaceShip(dimensions.rows - 20,colStart);
 
     }
     else
@@ -62,12 +62,15 @@
 
   var defenderBotName_row = 40;
 
-  function defenderLogic(){
-    var budget = GameSDK.getMyBudget(defenderBotName);
-    //console.info("defnder budget is" + budget);
+  function defenderLogic(data){
+    var budget = data.budget;//GameSDK.getMyBudget(defenderBotName);
+    var generation =  data.generation;
+    var dimensions = data.matrix;
 
-    if(budget >=4 && (GameSDK.getCurrentGeneration() % 4) == 0) {
-      var colStart = GameSDK.getCurrentGeneration() %  GameSDK.getMatrixDimensions().cols;
+
+
+    if(budget >=4 && (generation % 4) == 0) {
+      var colStart = generation %  dimensions.cols;
       if(colStart <= 3) {
         defenderBotName_row -= 5;
         if (defenderBotName_row <= 5) {
@@ -100,7 +103,10 @@
   var botName = "EmptyBot";
   var engineers =["Hagay","Avisar","Empty"];
 
-  function emptyBotlogic(){
+  function emptyBotlogic(data){
+    //console.info("budget:" + data.budget);
+    //console.info("generation:" + data.generation);
+    //console.info("matrix:" + data.matrix.rows + "/" + data.matrix.cols);
 
     return null;
   }
