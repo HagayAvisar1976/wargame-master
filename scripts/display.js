@@ -1,7 +1,5 @@
-var gameIntervalID =  null;
-var gameInterval = 10;
+
 var GAME_TIMEOUT = 90; // 90 seconds per one game
-var startGameTime = null;
 var cellSize =  5; // default
 var canvasHight =  LifeCore.getRowsNumber() * cellSize; // 700;
 var canvasWidth = LifeCore.getColmunsNumber() * cellSize;//1200;
@@ -14,19 +12,29 @@ var PLAYER_B = "PLAYER_B";
 
 function onLoad() {
 
-    //localStorage.clear(); // to save music file postion even after refresh the page.
-
     var c = document.getElementById("matrixCanvas");
     c.width = canvasWidth;
     c.height = canvasHight;
     setPlayersDisplayPanelWidth(canvasWidth);
 
-
     drawGridLines();
+
+    document.addEventListener("gameStarted",function(e){
+        gameStartedListener(e);
+    });
+
+    document.addEventListener("gameRound",function(e){
+        gameRoundListener(e);
+    });
 
     document.addEventListener("hit",function(e){
         hitListerer(e);
     });
+
+    document.addEventListener("gameOver",function(e){
+        gameOverListener(e);
+    });
+
 
     fillPlayersSelecetOptions();
 }
@@ -44,6 +52,29 @@ function fillPlayersSelecetOptions(){
         playerASelection.add(optionA, i +1);
         playerBSelection.add(optionB, i +1);
     }
+}
+
+function gameStartedListener(e){
+
+    startBackgroundMusic();
+
+    chooseRndIcon4Players();
+}
+
+function gameRoundListener(e) {
+
+    displayGameInfo();
+
+    updateScoreDisplay(e);
+
+    updateGameTimeDisplay(e)
+}
+
+function  gameOverListener(e) {
+
+    displayGameResults(e);
+    stopBackgroundMusic();
+    updateGameTimeDisplay(e);
 }
 
 function hitListerer(e) {
@@ -139,13 +170,12 @@ function displayGameInfo(){
     }
     document.getElementById('lblGeneration').innerHTML = "G: " + generation;//LifeCore.getGeneration();
 
-    updateScoreDisplay();
 }
 
-function updateScoreDisplay() {
+function updateScoreDisplay(data) {
 
-    var playerAScore = GameEngine.getPlayerScore(Players.PLAYER_A);
-    var playBScore = GameEngine.getPlayerScore(Players.PLAYER_B);
+    var playerAScore = data.detail.playerAScore;//GameEngine.getPlayerScore(Players.PLAYER_A);
+    var playBScore = data.detail.playerBScore;//GameEngine.getPlayerScore(Players.PLAYER_B);
 
     document.getElementById("lblPlayer_A_Score").innerText = playerAScore;
     document.getElementById("lblPlayer_B_Score").innerText = playBScore;
@@ -153,30 +183,10 @@ function updateScoreDisplay() {
     document.getElementById("playerBscore").innerText = playBScore;
 }
 
-function playRound(){
-
-    displayGameInfo();
-
-    GameEngine.playRound();
-
-    updateGameTimeDisplay();
-    if(isTimeOver()){
-        endGameOperations();
-    }
 
 
-}
-
-function endGameOperations() {
-    stopGame();
-    displayGameResults();
-    stopBackgroundMusic();
-    updateGameTimeDisplay();
-
-}
-
-function displayGameResults() {
-    var results = GameEngine.getTheWinner();
+function displayGameResults(e) {
+    var results = e.detail;//GameEngine.getTheWinner();
 
     document.getElementById("drawDivSection").style.display = "none";
     document.getElementById("resultDivSection").style.display = "none";
@@ -196,7 +206,7 @@ function displayGameResults() {
 
 function startNewGame() {
 
-    if(gameIntervalID==null) {
+    if(!gameContrller.isGameInProgress()) {
 
         var playerASelection = document.getElementById("playerASelectOption");
         var playerBSelection = document.getElementById("playerBSelectOption");
@@ -205,20 +215,12 @@ function startNewGame() {
             alert("Invalid bot selection, could not start a new game");
             return;
         }
-        GameEngine.newGame(playerASelection.options[playerASelection.selectedIndex].value,playerBSelection.options[playerBSelection.selectedIndex].value);
+        var gameSettings = new golSettings(GAME_TIMEOUT - 80);
+        gameContrller.startNewGame(gameSettings,playerASelection.options[playerASelection.selectedIndex].value,playerBSelection.options[playerBSelection.selectedIndex].value);
+
         document.getElementById("lblWinnerAnnouncement").style.display = "none"; // clean announcements label
         document.getElementById("resultDisplaySection").style.display = "none";
 
-        gameIntervalID = setInterval(playRound, gameInterval);
-        startGameTime = Date.now();
-
-
-        //$(".stopWatch").TimeCircles({timer:GAME_TIMEOUT, start:false, time: { Days: { show: false }, Hours: { show: false }, Minutes:{show:false}}});
-        //$(".stopWatch").TimeCircles().start();
-
-        startBackgroundMusic();
-
-        chooseRndIcon4Players();
     }
     else
     {
@@ -227,34 +229,9 @@ function startNewGame() {
 }
 
 
-function stopGame(){
+function updateGameTimeDisplay(data) {
 
-    if(gameIntervalID!=null && gameIntervalID!=undefined){
-        clearInterval(gameIntervalID);
-        gameIntervalID = null;
-        //$(".stopWatch").TimeCircles().stop();
-        //stopBackgroundMusic(); // need to fix bug when pressing stop button to stop the music as well... this is not the way :-)
-    }
-
-}
-
-function isTimeOver(){
-
-    var seconds = getGameTime();//Math.floor(millis/1000);
-
-    return (seconds >= GAME_TIMEOUT);
-}
-
-function getGameTime() {
-    var millis = Date.now() - startGameTime;
-    var seconds = Math.floor(millis/1000);
-
-    return seconds;
-}
-
-function updateGameTimeDisplay() {
-
-    var remainingSeconds = GAME_TIMEOUT - getGameTime();
+    var remainingSeconds = data.detail.remainingSeconds;//GAME_TIMEOUT - getGameTime();
     document.getElementById("gameTimeDisplay").className = "timeDisplay";
     if(remainingSeconds <=10){
         document.getElementById("gameTimeDisplay").className = "timeDisplay-blinking";
@@ -290,7 +267,6 @@ function gameTimeSelectionChange(element){
 
 function updateNewGameTime(newTime){
     GAME_TIMEOUT = newTime;
-    //$(".stopWatch").TimeCircles()
 }
 //-----------------------------------------------------------------------
 //=================== Method for Developer mode only ====================
@@ -305,19 +281,22 @@ function newGame()
         alert("Invalid bot selection, could not start a new game");
         return;
     }
-    GameEngine.newGame(playerASelection.options[playerASelection.selectedIndex].value,playerBSelection.options[playerBSelection.selectedIndex].value);
+    var gameSettings = new golSettings(GAME_TIMEOUT);
+    gameSettings.setGameMode(gameSettings.gameModes.DEV_MODE);
+    gameContrller.startNewGame(gameSettings,playerASelection.options[playerASelection.selectedIndex].value,playerBSelection.options[playerBSelection.selectedIndex].value);
+
     alert("Dev mode: New game create...");
 }
 
 function onNextGenClick() {
 
+    gameContrller.playRound();
     displayGameInfo();
-    GameEngine.playRound();
 }
 
 function useHalfBudegtOnChange(element) {
     // we use this option only when we have tie games.
-    GameEngine.setHalfBudgetFlag(element.checked);
+    gameContrller.setHalfBudgetFlag(element.checked);
 }
 
 
@@ -325,8 +304,8 @@ function useHalfBudegtOnChange(element) {
 
 AFTER THE GAME :
 //////////////////////////
-- push the data to bot and remove sdk objects
-- move control of the game to game engine instead of display
+- push the data to bot and remove sdk objects - done
+- move control of the game from display to game controller
 - create a mode of playing X games in a row to cancel the random affect.
 - create demo mode for bot (so we can see bot strategy)
 - color each cell according to payer
