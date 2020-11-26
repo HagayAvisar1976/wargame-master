@@ -107,6 +107,15 @@ function drawCells() {
         for (var col = 0; col < LifeCore.getColmunsNumber(); col++){
             if(LifeCore.getCellValue(row,col) === LifeStates.ALIVE)
             {
+                var cellOwner = LifeCore.getCellPlayer(row,col);
+                if(cellOwner!=null || cellOwner!= undefined){
+                    ctx.fillStyle = (cellOwner === Players.PLAYER_A)? playerAColor :playerBColor;
+                }
+                else{
+                    ctx.fillStyle = "white";
+                }
+
+
                 ctx.lineWidth = 1;
                 ctx.fillRect(col*cellSize, row*cellSize, cellSize, cellSize);
             }
@@ -215,7 +224,7 @@ function startNewGame() {
             alert("Invalid bot selection, could not start a new game");
             return;
         }
-        var gameSettings = new golSettings(GAME_TIMEOUT - 80);
+        var gameSettings = new golSettings(GAME_TIMEOUT);
         gameContrller.startNewGame(gameSettings,playerASelection.options[playerASelection.selectedIndex].value,playerBSelection.options[playerBSelection.selectedIndex].value);
 
         document.getElementById("lblWinnerAnnouncement").style.display = "none"; // clean announcements label
@@ -305,10 +314,10 @@ function useHalfBudegtOnChange(element) {
 AFTER THE GAME :
 //////////////////////////
 - push the data to bot and remove sdk objects - done
-- move control of the game from display to game controller
-- create a mode of playing X games in a row to cancel the random affect.
-- create demo mode for bot (so we can see bot strategy)
+- move control of the game from display to game controller - done
 - color each cell according to payer
+- create demo mode for bot (so we can see bot strategy)
+- create a mode of playing X games in a row to cancel the random affect.
 
 - create small star when cell is created
 - display pictures of winners and losers.

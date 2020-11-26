@@ -2,10 +2,7 @@
 var BudgetIncreasePerCycle = 1;
 //var SCORE_TO_WIN = 3;
 
-var Players = {
-    PLAYER_A: "A",
-    PLAYER_B: "B"
-};
+
 
 var GameEngine = {
 
@@ -58,10 +55,10 @@ var GameEngine = {
         LifeCore.nextGenerationMatrix();
 
         // play move for player A
-        this.playerMove(playerA,false);
+        this.playerMove(playerA,false,Players.PLAYER_A);
 
         // play move for player B
-        this.playerMove(playerB,true);
+        this.playerMove(playerB,true,Players.PLAYER_B);
 
     },
 
@@ -73,9 +70,9 @@ var GameEngine = {
         {
             var neighbors = LifeCore.getNeighbors(cells[i].row,cells[i].col);
             for (var x = 0; x < neighbors.length; x++) {
-                LifeCore.setLifeMatrixCell(neighbors[x],LifeStates.DEAD);
+                LifeCore.setLifeMatrixCell(neighbors[x],LifeStates.DEAD,null);
             }
-            LifeCore.setLifeMatrixCell(cells[i],LifeStates.DEAD);
+            LifeCore.setLifeMatrixCell(cells[i],LifeStates.DEAD,null);
         }
     },
 
@@ -94,7 +91,7 @@ var GameEngine = {
 
     },
 
-    playerMove : function(player,isMirror){
+    playerMove : function(player,isMirror,owner){
         var cellsToUpdate =  player.playMove();
         cellsToUpdate = this.playerCellsValidation(cellsToUpdate);
         cellsToUpdate = this.corruptedCellsValidation(cellsToUpdate);
@@ -102,7 +99,7 @@ var GameEngine = {
             if(isMirror) {
                 this.mirrorCellsForFighter(cellsToUpdate);
             }
-            LifeCore.setLifeMatrixCells(cellsToUpdate);
+            LifeCore.setLifeMatrixCells(cellsToUpdate,owner);
             player.updateBudget((cellsToUpdate.length * -1));
         }
     },
