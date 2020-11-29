@@ -63,7 +63,9 @@ function gameStartedListener(e){
 
 function gameRoundListener(e) {
 
-    displayGameInfo();
+    displayGameBoard();
+
+    displayGameGeneration();
 
     updateScoreDisplay(e);
 
@@ -90,60 +92,13 @@ function hitListerer(e) {
 
 }
 
+function drawGolBoard() {
 
-function drawCells() {
-
-    var c = document.getElementById("matrixCanvas");
-    var ctx = c.getContext("2d");
-    ctx.fillStyle = "white";
-    ctx.strokeStyle = "#999";
-
-    ctx.clearRect(0,0,canvasWidth,canvasHight);
+    drawCells();
 
     drawGridLines();
 
-    // draw cells
-    for(var row = 0; row < LifeCore.getRowsNumber(); row++){
-        for (var col = 0; col < LifeCore.getColmunsNumber(); col++){
-            if(LifeCore.getCellValue(row,col) === LifeStates.ALIVE)
-            {
-                var cellOwner = LifeCore.getCellPlayer(row,col);
-                if(cellOwner!=null || cellOwner!= undefined){
-                    ctx.fillStyle = (cellOwner === Players.PLAYER_A)? playerAColor :playerBColor;
-                }
-                else{
-                    ctx.fillStyle = "white";
-                }
-
-
-                ctx.lineWidth = 1;
-                ctx.fillRect(col*cellSize, row*cellSize, cellSize, cellSize);
-            }
-        }
-    }
-
     drawWalls();
-}
-
-function drawWalls(){
-
-    drawPlayerWall(0, playerAColor);
-    drawPlayerWall(LifeCore.getRowsNumber() - 1, playerBColor);
-}
-
-function drawPlayerWall(row,color){
-
-    var c = document.getElementById("matrixCanvas");
-    var ctx = c.getContext("2d");
-    ctx.fillStyle = color;
-
-    var halfCellSize  = cellSize / 2; // make wall line a little thiner..
-    for (var col = 0; col < LifeCore.getColmunsNumber(); col++) {
-
-        ctx.lineWidth = 1;
-        ctx.fillRect(col * cellSize, row * cellSize, halfCellSize, halfCellSize);
-    }
-
 }
 
 function drawGridLines() {
@@ -170,15 +125,68 @@ function drawGridLines() {
 
 }
 
-function displayGameInfo(){
+function drawCells() {
+    var c = document.getElementById("matrixCanvas");
+    var ctx = c.getContext("2d");
+    ctx.fillStyle = "white";
+    ctx.strokeStyle = "#999";
+
+    ctx.clearRect(0, 0, canvasWidth, canvasHight);
+
+    // draw cells
+    for (var row = 0; row < LifeCore.getRowsNumber(); row++) {
+        for (var col = 0; col < LifeCore.getColmunsNumber(); col++) {
+            if (LifeCore.getCellValue(row, col) === LifeStates.ALIVE) {
+                var cellOwner = LifeCore.getCellPlayer(row, col);
+                if (cellOwner != null || cellOwner != undefined) {
+                    ctx.fillStyle = (cellOwner === Players.PLAYER_A)
+                        ? playerAColor : playerBColor;
+                } else {
+                    ctx.fillStyle = "white";
+                }
+
+                ctx.lineWidth = 1;
+                ctx.fillRect(col * cellSize, row * cellSize, cellSize,
+                    cellSize);
+            }
+        }
+    }
+}
+
+function drawWalls(){
+
+    drawPlayerWall(0, playerAColor);
+    drawPlayerWall(LifeCore.getRowsNumber() - 1, playerBColor);
+}
+
+function drawPlayerWall(row,color){
+
+    var c = document.getElementById("matrixCanvas");
+    var ctx = c.getContext("2d");
+    ctx.fillStyle = color;
+
+    var halfCellSize  = cellSize / 2; // make wall line a little thiner..
+    for (var col = 0; col < LifeCore.getColmunsNumber(); col++) {
+
+        ctx.lineWidth = 1;
+        ctx.fillRect(col * cellSize, row * cellSize, halfCellSize, halfCellSize);
+    }
+
+}
+
+function displayGameBoard(){
 
     var refreshRate =  document.getElementById("screenRefreshRate").value;
     var generation = LifeCore.getGeneration();
     if((generation % refreshRate) ===0 ){
-        drawCells();
+        drawGolBoard();
     }
-    document.getElementById('lblGeneration').innerHTML = "G: " + generation;//LifeCore.getGeneration();
 
+}
+
+function displayGameGeneration(){
+    var generation = LifeCore.getGeneration();
+    document.getElementById('lblGeneration').innerHTML = "G: " + generation;//LifeCore.getGeneration();
 }
 
 function updateScoreDisplay(data) {
@@ -315,7 +323,7 @@ AFTER THE GAME :
 //////////////////////////
 - push the data to bot and remove sdk objects - done
 - move control of the game from display to game controller - done
-- color each cell according to payer
+- color each cell according to payer - done
 - create demo mode for bot (so we can see bot strategy)
 - create a mode of playing X games in a row to cancel the random affect.
 
