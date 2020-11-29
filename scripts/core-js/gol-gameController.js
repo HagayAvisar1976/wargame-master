@@ -35,14 +35,19 @@ var gameContrller = {
 
     GameEngine.playRound();
 
-    // in dev mode there is no need to check for time or fire events.
+    gameContrller.firePlayRoundEvent();
+
+    // in dev mode there is no need to check for game end time.
     if(gameContrller._gameSettings.gameMode === gameContrller._gameSettings.gameModes.REGULAR_GAME) {
-      gameContrller.firePlayRoundEvent();
 
       if (gameContrller.isTimeOver()) {
         gameContrller.endGameOperations();
       }
     }
+  },
+
+  currentGameMode : function (){
+    return gameContrller._gameSettings.gameMode;
   },
 
   isGameInProgress : function(){

@@ -248,6 +248,8 @@ function startNewGame() {
 
 function updateGameTimeDisplay(data) {
 
+    if(gameContrller.currentGameMode() === golSettings.gameModes.DEV_MODE) return; // do not need to update time in Dev mode game.
+
     var remainingSeconds = data.detail.remainingSeconds;//GAME_TIMEOUT - getGameTime();
     document.getElementById("gameTimeDisplay").className = "timeDisplay";
     if(remainingSeconds <=10){
@@ -308,7 +310,7 @@ function newGame()
 function onNextGenClick() {
 
     gameContrller.playRound();
-    displayGameInfo();
+    //displayGameInfo();
 }
 
 function useHalfBudegtOnChange(element) {
